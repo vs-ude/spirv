@@ -3,8 +3,6 @@
 
 package spirv
 
-import "math"
-
 // String defines an decodeable/encodeable string literal.
 //
 // A SPIR-V string literal is a nul-terminated stream of characters consuming
@@ -44,13 +42,9 @@ func DecodeString(words []uint32) String {
 }
 
 // EncodedLen returns the number of words occupied by the string, once encoded.
-func (s String) EncodedLen() uint32 {
-	if len(s) == 0 {
-		// An empty string still needs a nul terminator.
-		return 1
-	}
-
-	return uint32(math.Ceil(float64(len(s)+1) / 4))
+func (s String) EncodedLen() int {
+	bytes := len(s)
+	return (bytes + 4 - (bytes % 4)) / 4
 }
 
 // Encode converts string s to a SPIR-V string literal and writes the result
