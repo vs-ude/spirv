@@ -153,6 +153,7 @@ func DecodeInstruction(words []uint32) (Instruction, error) {
 	}
 
 	instr := constructor()
+	fmt.Println("decoding", instructionName(instr), wordCount, words)
 
 	// This instruction is illegal.
 	// FIXME Remove this once instruction validation code is in.
@@ -229,32 +230,40 @@ func decodeSlice(rv reflect.Value, argv []uint32) ([]uint32, error) {
 	rt := rv.Type()
 	et := rt.Elem()
 
-	// Ensure that the slice elements are either uint32, or an alias thereof.
-	if et.Kind() != reflect.Uint32 {
-		return nil, fmt.Errorf("slice elements must resolve to uint32")
+	if rv.Kind() != reflect.Uint32 {
+
 	}
 
-	// if this is a straight-up uint32 slice, just copy the input.
-	// Any other value is an alias and implements at least the Verifiable
-	// interface. Which means it has at least 1 method attached to it.
-	if rt.Elem().NumMethod() == 0 {
-		copy := Copy(argv)
-		rv.Set(reflect.ValueOf(copy))
+	switch et.Kind() {
+	case reflect.Uint32:
+		// If this is a straight-up uint32 slice, just copy the input.
+		// Any other value is an alias and implements at least the Verifiable
+		// interface. Which means it has at least 1 method attached to it.
+		if rt.Elem().NumMethod() == 0 {
+			copy := Copy(argv)
+			rv.Set(reflect.ValueOf(copy))
+			return nil, nil
+		}
+
+		// Otherwise we have to do some manualy copying magic.
+		new := reflect.MakeSlice(rt, 0, len(argv))
+
+		for _, word := range argv {
+			elem := reflect.New(et)
+			elem = reflect.Indirect(elem)
+			elem.SetUint(uint64(word))
+			new = reflect.Append(new, elem)
+		}
+
+		rv.Set(new)
 		return nil, nil
+	case reflect.Struct:
+		// TODO parse pairs
+		fmt.Println("[[we would be decoding a struct, but this is still TODO]]")
+		return nil, nil
+	default:
+		return nil, fmt.Errorf("cannot resolve slice type to uint32 or known struct")
 	}
-
-	// Otherwise we have to do some manualy copying magic.
-	new := reflect.MakeSlice(rt, 0, len(argv))
-
-	for _, word := range argv {
-		elem := reflect.New(et)
-		elem = reflect.Indirect(elem)
-		elem.SetUint(uint64(word))
-		new = reflect.Append(new, elem)
-	}
-
-	rv.Set(new)
-	return nil, nil
 }
 
 // decodeStruct decodes input data into a struct.

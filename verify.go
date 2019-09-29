@@ -32,10 +32,11 @@ var regLayoutPattern *regexp.Regexp
 
 // construct the layout regex pattern.
 func init() {
+	// TODO update
 	pattern := []rune{
 		opcodeSource, regSingleOptional,
 		opcodeSourceExtension, regMultiOptional,
-		opcodeCompileFlag, regMultiOptional,
+		// opcodeCompileFlag, regMultiOptional,
 		opcodeExtension, regMultiOptional,
 		opcodeExtInstImport, regMultiOptional,
 
@@ -61,7 +62,7 @@ func init() {
 		opcodeTypeBool, regOr,
 		opcodeTypeDeviceEvent, regOr,
 		opcodeTypeEvent, regOr,
-		opcodeTypeFilter, regOr,
+		// opcodeTypeFilter, regOr,
 		opcodeTypeFloat, regOr,
 		opcodeTypeFunction, regOr,
 		opcodeTypeInt, regOr,
@@ -79,8 +80,8 @@ func init() {
 		opcodeConstant, regOr,
 		opcodeConstantComposite, regOr,
 		opcodeConstantFalse, regOr,
-		opcodeConstantNullObject, regOr,
-		opcodeConstantNullPointer, regOr,
+		// opcodeConstantNullObject, regOr,
+		// opcodeConstantNullPointer, regOr,
 		opcodeConstantSampler, regOr,
 		opcodeConstantTrue, regOr,
 		opcodeVariable, // Can be only global -- Storage Class != Function
