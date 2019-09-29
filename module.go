@@ -237,7 +237,7 @@ func (m *Module) hasLinkageType() bool {
 
 	for _, i := range decorations {
 		v := i.(*OpDecorate)
-		if v.Decoration == DecorationLinkageType {
+		if v.Decoration == DecorationLinkageAttributes {
 			return true
 		}
 	}
@@ -250,8 +250,8 @@ func (m *Module) hasLinkageType() bool {
 func (m *Module) verifyLogicalAddressing() error {
 	v := m.Code.First(opcodeMemoryModel).(*OpMemoryModel)
 
-	if v.AddressingModel != AddressingModeLogical {
-		// These rules apply only to AddressingModeLogical
+	if v.AddressingModel != AddressingModelLogical {
+		// These rules apply only to AddressingModelLogical
 		return nil
 	}
 
