@@ -155,7 +155,7 @@ func encodedValueLen(rv reflect.Value) int {
 	case reflect.Uint32:
 		return 1
 	case reflect.String:
-		return int(String(rv.String()).EncodedLen())
+		return String(rv.String()).EncodedLen()
 	}
 	return 0
 }
@@ -194,7 +194,7 @@ func encodeValue(rv reflect.Value, out []uint32) (uint32, error) {
 
 	case reflect.String:
 		str := String(rv.String())
-		size := str.EncodedLen()
+		size := uint32(str.EncodedLen())
 		str.Encode(out)
 		return size, nil
 	}
