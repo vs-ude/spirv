@@ -230,10 +230,6 @@ func decodeSlice(rv reflect.Value, argv []uint32) ([]uint32, error) {
 	rt := rv.Type()
 	et := rt.Elem()
 
-	if rv.Kind() != reflect.Uint32 {
-
-	}
-
 	switch et.Kind() {
 	case reflect.Uint32:
 		// If this is a straight-up uint32 slice, just copy the input.
@@ -245,7 +241,7 @@ func decodeSlice(rv reflect.Value, argv []uint32) ([]uint32, error) {
 			return nil, nil
 		}
 
-		// Otherwise we have to do some manualy copying magic.
+		// Otherwise we have to do some manual copying magic.
 		new := reflect.MakeSlice(rt, 0, len(argv))
 
 		for _, word := range argv {
@@ -258,8 +254,25 @@ func decodeSlice(rv reflect.Value, argv []uint32) ([]uint32, error) {
 		rv.Set(new)
 		return nil, nil
 	case reflect.Struct:
-		// TODO parse pairs
-		fmt.Println("[[we would be decoding a struct, but this is still TODO]]")
+		// TODO determine struct size (all currently 1 per field)
+		if len(argv)%et.NumField() != 0 {
+			return nil, fmt.Errorf("cannot decode non-pair structs")
+		}
+		length := int(len(argv) / et.NumField())
+		new := reflect.MakeSlice(rt, 0, length)
+
+		for len(argv) > 0 {
+			elem := reflect.New(et)
+			elem = reflect.Indirect(elem)
+			var err error
+			argv, err = decodeStruct(elem, argv)
+			if err != nil {
+				return nil, err
+			}
+			new = reflect.Append(new, elem)
+		}
+
+		rv.Set(new)
 		return nil, nil
 	default:
 		return nil, fmt.Errorf("cannot resolve slice type to uint32 or known struct")
