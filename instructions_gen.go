@@ -10,8 +10,8 @@ func (op *OpNop) Optional() bool { return false }
 func (op *OpNop) Verify() error  { return nil }
 
 type OpUndef struct {
-	IdResultType Id
-	IdResult     Id
+	ResultType Id
+	ResultId   Id
 }
 
 func (op *OpUndef) Opcode() uint32 { return opcodeUndef }
@@ -65,7 +65,7 @@ func (op *OpMemberName) Optional() bool { return true }
 func (op *OpMemberName) Verify() error  { return nil }
 
 type OpString struct {
-	IdResult Id
+	ResultId Id
 	String   String
 }
 
@@ -92,7 +92,7 @@ func (op *OpExtension) Optional() bool { return false }
 func (op *OpExtension) Verify() error  { return nil }
 
 type OpExtInstImport struct {
-	IdResult Id
+	ResultId Id
 	Name     String
 }
 
@@ -101,11 +101,11 @@ func (op *OpExtInstImport) Optional() bool { return false }
 func (op *OpExtInstImport) Verify() error  { return nil }
 
 type OpExtInst struct {
-	IdResultType Id
-	IdResult     Id
-	Set          Id
-	Instruction  uint32
-	Argv         []Id `spirv:"optional"`
+	ResultType  Id
+	ResultId    Id
+	Set         Id
+	Instruction uint32
+	Argv        []Id `spirv:"optional"`
 }
 
 func (op *OpExtInst) Opcode() uint32 { return opcodeExtInst }
@@ -151,7 +151,7 @@ func (op *OpCapability) Optional() bool { return false }
 func (op *OpCapability) Verify() error  { return nil }
 
 type OpTypeVoid struct {
-	IdResult Id
+	ResultId Id
 }
 
 func (op *OpTypeVoid) Opcode() uint32 { return opcodeTypeVoid }
@@ -159,7 +159,7 @@ func (op *OpTypeVoid) Optional() bool { return false }
 func (op *OpTypeVoid) Verify() error  { return nil }
 
 type OpTypeBool struct {
-	IdResult Id
+	ResultId Id
 }
 
 func (op *OpTypeBool) Opcode() uint32 { return opcodeTypeBool }
@@ -167,7 +167,7 @@ func (op *OpTypeBool) Optional() bool { return false }
 func (op *OpTypeBool) Verify() error  { return nil }
 
 type OpTypeInt struct {
-	IdResult   Id
+	ResultId   Id
 	Width      uint32
 	Signedness uint32
 }
@@ -177,7 +177,7 @@ func (op *OpTypeInt) Optional() bool { return false }
 func (op *OpTypeInt) Verify() error  { return nil }
 
 type OpTypeFloat struct {
-	IdResult Id
+	ResultId Id
 	Width    uint32
 }
 
@@ -186,7 +186,7 @@ func (op *OpTypeFloat) Optional() bool { return false }
 func (op *OpTypeFloat) Verify() error  { return nil }
 
 type OpTypeVector struct {
-	IdResult       Id
+	ResultId       Id
 	ComponentType  Id
 	ComponentCount uint32
 }
@@ -196,7 +196,7 @@ func (op *OpTypeVector) Optional() bool { return false }
 func (op *OpTypeVector) Verify() error  { return nil }
 
 type OpTypeMatrix struct {
-	IdResult    Id
+	ResultId    Id
 	ColumnType  Id
 	ColumnCount uint32
 }
@@ -206,7 +206,7 @@ func (op *OpTypeMatrix) Optional() bool { return false }
 func (op *OpTypeMatrix) Verify() error  { return nil }
 
 type OpTypeImage struct {
-	IdResult        Id
+	ResultId        Id
 	SampledType     Id
 	Dim             Dim
 	Depth           uint32
@@ -222,7 +222,7 @@ func (op *OpTypeImage) Optional() bool { return false }
 func (op *OpTypeImage) Verify() error  { return nil }
 
 type OpTypeSampler struct {
-	IdResult Id
+	ResultId Id
 }
 
 func (op *OpTypeSampler) Opcode() uint32 { return opcodeTypeSampler }
@@ -230,7 +230,7 @@ func (op *OpTypeSampler) Optional() bool { return false }
 func (op *OpTypeSampler) Verify() error  { return nil }
 
 type OpTypeSampledImage struct {
-	IdResult  Id
+	ResultId  Id
 	ImageType Id
 }
 
@@ -239,7 +239,7 @@ func (op *OpTypeSampledImage) Optional() bool { return false }
 func (op *OpTypeSampledImage) Verify() error  { return nil }
 
 type OpTypeArray struct {
-	IdResult    Id
+	ResultId    Id
 	ElementType Id
 	Length      Id
 }
@@ -249,7 +249,7 @@ func (op *OpTypeArray) Optional() bool { return false }
 func (op *OpTypeArray) Verify() error  { return nil }
 
 type OpTypeRuntimeArray struct {
-	IdResult    Id
+	ResultId    Id
 	ElementType Id
 }
 
@@ -258,7 +258,7 @@ func (op *OpTypeRuntimeArray) Optional() bool { return false }
 func (op *OpTypeRuntimeArray) Verify() error  { return nil }
 
 type OpTypeStruct struct {
-	IdResult Id
+	ResultId Id
 	Argv     []Id `spirv:"optional"`
 }
 
@@ -267,7 +267,7 @@ func (op *OpTypeStruct) Optional() bool { return false }
 func (op *OpTypeStruct) Verify() error  { return nil }
 
 type OpTypeOpaque struct {
-	IdResult                Id
+	ResultId                Id
 	TheNameOfTheOpaqueType_ String
 }
 
@@ -276,7 +276,7 @@ func (op *OpTypeOpaque) Optional() bool { return false }
 func (op *OpTypeOpaque) Verify() error  { return nil }
 
 type OpTypePointer struct {
-	IdResult     Id
+	ResultId     Id
 	StorageClass StorageClass
 	Type         Id
 }
@@ -286,7 +286,7 @@ func (op *OpTypePointer) Optional() bool { return false }
 func (op *OpTypePointer) Verify() error  { return nil }
 
 type OpTypeFunction struct {
-	IdResult   Id
+	ResultId   Id
 	ReturnType Id
 	Argv       []Id `spirv:"optional"`
 }
@@ -296,7 +296,7 @@ func (op *OpTypeFunction) Optional() bool { return false }
 func (op *OpTypeFunction) Verify() error  { return nil }
 
 type OpTypeEvent struct {
-	IdResult Id
+	ResultId Id
 }
 
 func (op *OpTypeEvent) Opcode() uint32 { return opcodeTypeEvent }
@@ -304,7 +304,7 @@ func (op *OpTypeEvent) Optional() bool { return false }
 func (op *OpTypeEvent) Verify() error  { return nil }
 
 type OpTypeDeviceEvent struct {
-	IdResult Id
+	ResultId Id
 }
 
 func (op *OpTypeDeviceEvent) Opcode() uint32 { return opcodeTypeDeviceEvent }
@@ -312,7 +312,7 @@ func (op *OpTypeDeviceEvent) Optional() bool { return false }
 func (op *OpTypeDeviceEvent) Verify() error  { return nil }
 
 type OpTypeReserveId struct {
-	IdResult Id
+	ResultId Id
 }
 
 func (op *OpTypeReserveId) Opcode() uint32 { return opcodeTypeReserveId }
@@ -320,7 +320,7 @@ func (op *OpTypeReserveId) Optional() bool { return false }
 func (op *OpTypeReserveId) Verify() error  { return nil }
 
 type OpTypeQueue struct {
-	IdResult Id
+	ResultId Id
 }
 
 func (op *OpTypeQueue) Opcode() uint32 { return opcodeTypeQueue }
@@ -328,7 +328,7 @@ func (op *OpTypeQueue) Optional() bool { return false }
 func (op *OpTypeQueue) Verify() error  { return nil }
 
 type OpTypePipe struct {
-	IdResult  Id
+	ResultId  Id
 	Qualifier AccessQualifier
 }
 
@@ -346,8 +346,8 @@ func (op *OpTypeForwardPointer) Optional() bool { return false }
 func (op *OpTypeForwardPointer) Verify() error  { return nil }
 
 type OpConstantTrue struct {
-	IdResultType Id
-	IdResult     Id
+	ResultType Id
+	ResultId   Id
 }
 
 func (op *OpConstantTrue) Opcode() uint32 { return opcodeConstantTrue }
@@ -355,8 +355,8 @@ func (op *OpConstantTrue) Optional() bool { return false }
 func (op *OpConstantTrue) Verify() error  { return nil }
 
 type OpConstantFalse struct {
-	IdResultType Id
-	IdResult     Id
+	ResultType Id
+	ResultId   Id
 }
 
 func (op *OpConstantFalse) Opcode() uint32 { return opcodeConstantFalse }
@@ -364,9 +364,9 @@ func (op *OpConstantFalse) Optional() bool { return false }
 func (op *OpConstantFalse) Verify() error  { return nil }
 
 type OpConstant struct {
-	IdResultType Id
-	IdResult     Id
-	Value        uint32
+	ResultType Id
+	ResultId   Id
+	Value      uint32
 }
 
 func (op *OpConstant) Opcode() uint32 { return opcodeConstant }
@@ -374,8 +374,8 @@ func (op *OpConstant) Optional() bool { return false }
 func (op *OpConstant) Verify() error  { return nil }
 
 type OpConstantComposite struct {
-	IdResultType Id
-	IdResult     Id
+	ResultType   Id
+	ResultId     Id
 	Constituents []Id `spirv:"optional"`
 }
 
@@ -384,8 +384,8 @@ func (op *OpConstantComposite) Optional() bool { return false }
 func (op *OpConstantComposite) Verify() error  { return nil }
 
 type OpConstantSampler struct {
-	IdResultType          Id
-	IdResult              Id
+	ResultType            Id
+	ResultId              Id
 	SamplerAddressingMode SamplerAddressingMode
 	Param                 uint32
 	SamplerFilterMode     SamplerFilterMode
@@ -396,8 +396,8 @@ func (op *OpConstantSampler) Optional() bool { return false }
 func (op *OpConstantSampler) Verify() error  { return nil }
 
 type OpConstantNull struct {
-	IdResultType Id
-	IdResult     Id
+	ResultType Id
+	ResultId   Id
 }
 
 func (op *OpConstantNull) Opcode() uint32 { return opcodeConstantNull }
@@ -405,8 +405,8 @@ func (op *OpConstantNull) Optional() bool { return false }
 func (op *OpConstantNull) Verify() error  { return nil }
 
 type OpSpecConstantTrue struct {
-	IdResultType Id
-	IdResult     Id
+	ResultType Id
+	ResultId   Id
 }
 
 func (op *OpSpecConstantTrue) Opcode() uint32 { return opcodeSpecConstantTrue }
@@ -414,8 +414,8 @@ func (op *OpSpecConstantTrue) Optional() bool { return false }
 func (op *OpSpecConstantTrue) Verify() error  { return nil }
 
 type OpSpecConstantFalse struct {
-	IdResultType Id
-	IdResult     Id
+	ResultType Id
+	ResultId   Id
 }
 
 func (op *OpSpecConstantFalse) Opcode() uint32 { return opcodeSpecConstantFalse }
@@ -423,9 +423,9 @@ func (op *OpSpecConstantFalse) Optional() bool { return false }
 func (op *OpSpecConstantFalse) Verify() error  { return nil }
 
 type OpSpecConstant struct {
-	IdResultType Id
-	IdResult     Id
-	Value        uint32
+	ResultType Id
+	ResultId   Id
+	Value      uint32
 }
 
 func (op *OpSpecConstant) Opcode() uint32 { return opcodeSpecConstant }
@@ -433,8 +433,8 @@ func (op *OpSpecConstant) Optional() bool { return false }
 func (op *OpSpecConstant) Verify() error  { return nil }
 
 type OpSpecConstantComposite struct {
-	IdResultType Id
-	IdResult     Id
+	ResultType   Id
+	ResultId     Id
 	Constituents []Id `spirv:"optional"`
 }
 
@@ -443,9 +443,9 @@ func (op *OpSpecConstantComposite) Optional() bool { return false }
 func (op *OpSpecConstantComposite) Verify() error  { return nil }
 
 type OpSpecConstantOp struct {
-	IdResultType Id
-	IdResult     Id
-	OpcodeParam  uint32
+	ResultType  Id
+	ResultId    Id
+	OpcodeParam uint32
 }
 
 func (op *OpSpecConstantOp) Opcode() uint32 { return opcodeSpecConstantOp }
@@ -453,8 +453,8 @@ func (op *OpSpecConstantOp) Optional() bool { return false }
 func (op *OpSpecConstantOp) Verify() error  { return nil }
 
 type OpFunction struct {
-	IdResultType    Id
-	IdResult        Id
+	ResultType      Id
+	ResultId        Id
 	FunctionControl FunctionControl
 	FunctionType    Id
 }
@@ -464,8 +464,8 @@ func (op *OpFunction) Optional() bool { return false }
 func (op *OpFunction) Verify() error  { return nil }
 
 type OpFunctionParameter struct {
-	IdResultType Id
-	IdResult     Id
+	ResultType Id
+	ResultId   Id
 }
 
 func (op *OpFunctionParameter) Opcode() uint32 { return opcodeFunctionParameter }
@@ -480,10 +480,10 @@ func (op *OpFunctionEnd) Optional() bool { return false }
 func (op *OpFunctionEnd) Verify() error  { return nil }
 
 type OpFunctionCall struct {
-	IdResultType Id
-	IdResult     Id
-	Function     Id
-	Argv         []Id `spirv:"optional"`
+	ResultType Id
+	ResultId   Id
+	Function   Id
+	Argv       []Id `spirv:"optional"`
 }
 
 func (op *OpFunctionCall) Opcode() uint32 { return opcodeFunctionCall }
@@ -491,8 +491,8 @@ func (op *OpFunctionCall) Optional() bool { return false }
 func (op *OpFunctionCall) Verify() error  { return nil }
 
 type OpVariable struct {
-	IdResultType Id
-	IdResult     Id
+	ResultType   Id
+	ResultId     Id
 	StorageClass StorageClass
 	Initializer  Id `spirv:"optional"`
 }
@@ -502,11 +502,11 @@ func (op *OpVariable) Optional() bool { return false }
 func (op *OpVariable) Verify() error  { return nil }
 
 type OpImageTexelPointer struct {
-	IdResultType Id
-	IdResult     Id
-	Image        Id
-	Coordinate   Id
-	Sample       Id
+	ResultType Id
+	ResultId   Id
+	Image      Id
+	Coordinate Id
+	Sample     Id
 }
 
 func (op *OpImageTexelPointer) Opcode() uint32 { return opcodeImageTexelPointer }
@@ -514,8 +514,8 @@ func (op *OpImageTexelPointer) Optional() bool { return false }
 func (op *OpImageTexelPointer) Verify() error  { return nil }
 
 type OpLoad struct {
-	IdResultType Id
-	IdResult     Id
+	ResultType   Id
+	ResultId     Id
 	Pointer      Id
 	MemoryAccess MemoryAccess `spirv:"optional"`
 }
@@ -558,10 +558,10 @@ func (op *OpCopyMemorySized) Optional() bool { return false }
 func (op *OpCopyMemorySized) Verify() error  { return nil }
 
 type OpAccessChain struct {
-	IdResultType Id
-	IdResult     Id
-	Base         Id
-	Indexes      []Id `spirv:"optional"`
+	ResultType Id
+	ResultId   Id
+	Base       Id
+	Indexes    []Id `spirv:"optional"`
 }
 
 func (op *OpAccessChain) Opcode() uint32 { return opcodeAccessChain }
@@ -569,10 +569,10 @@ func (op *OpAccessChain) Optional() bool { return false }
 func (op *OpAccessChain) Verify() error  { return nil }
 
 type OpInBoundsAccessChain struct {
-	IdResultType Id
-	IdResult     Id
-	Base         Id
-	Indexes      []Id `spirv:"optional"`
+	ResultType Id
+	ResultId   Id
+	Base       Id
+	Indexes    []Id `spirv:"optional"`
 }
 
 func (op *OpInBoundsAccessChain) Opcode() uint32 { return opcodeInBoundsAccessChain }
@@ -580,11 +580,11 @@ func (op *OpInBoundsAccessChain) Optional() bool { return false }
 func (op *OpInBoundsAccessChain) Verify() error  { return nil }
 
 type OpPtrAccessChain struct {
-	IdResultType Id
-	IdResult     Id
-	Base         Id
-	Element      Id
-	Indexes      []Id `spirv:"optional"`
+	ResultType Id
+	ResultId   Id
+	Base       Id
+	Element    Id
+	Indexes    []Id `spirv:"optional"`
 }
 
 func (op *OpPtrAccessChain) Opcode() uint32 { return opcodePtrAccessChain }
@@ -592,10 +592,10 @@ func (op *OpPtrAccessChain) Optional() bool { return false }
 func (op *OpPtrAccessChain) Verify() error  { return nil }
 
 type OpArrayLength struct {
-	IdResultType Id
-	IdResult     Id
-	Structure    Id
-	ArrayMember  uint32
+	ResultType  Id
+	ResultId    Id
+	Structure   Id
+	ArrayMember uint32
 }
 
 func (op *OpArrayLength) Opcode() uint32 { return opcodeArrayLength }
@@ -603,9 +603,9 @@ func (op *OpArrayLength) Optional() bool { return false }
 func (op *OpArrayLength) Verify() error  { return nil }
 
 type OpGenericPtrMemSemantics struct {
-	IdResultType Id
-	IdResult     Id
-	Pointer      Id
+	ResultType Id
+	ResultId   Id
+	Pointer    Id
 }
 
 func (op *OpGenericPtrMemSemantics) Opcode() uint32 { return opcodeGenericPtrMemSemantics }
@@ -613,11 +613,11 @@ func (op *OpGenericPtrMemSemantics) Optional() bool { return false }
 func (op *OpGenericPtrMemSemantics) Verify() error  { return nil }
 
 type OpInBoundsPtrAccessChain struct {
-	IdResultType Id
-	IdResult     Id
-	Base         Id
-	Element      Id
-	Indexes      []Id `spirv:"optional"`
+	ResultType Id
+	ResultId   Id
+	Base       Id
+	Element    Id
+	Indexes    []Id `spirv:"optional"`
 }
 
 func (op *OpInBoundsPtrAccessChain) Opcode() uint32 { return opcodeInBoundsPtrAccessChain }
@@ -646,7 +646,7 @@ func (op *OpMemberDecorate) Optional() bool { return false }
 func (op *OpMemberDecorate) Verify() error  { return nil }
 
 type OpDecorationGroup struct {
-	IdResult Id
+	ResultId Id
 }
 
 func (op *OpDecorationGroup) Opcode() uint32 { return opcodeDecorationGroup }
@@ -672,10 +672,10 @@ func (op *OpGroupMemberDecorate) Optional() bool { return false }
 func (op *OpGroupMemberDecorate) Verify() error  { return nil }
 
 type OpVectorExtractDynamic struct {
-	IdResultType Id
-	IdResult     Id
-	Vector       Id
-	Index        Id
+	ResultType Id
+	ResultId   Id
+	Vector     Id
+	Index      Id
 }
 
 func (op *OpVectorExtractDynamic) Opcode() uint32 { return opcodeVectorExtractDynamic }
@@ -683,11 +683,11 @@ func (op *OpVectorExtractDynamic) Optional() bool { return false }
 func (op *OpVectorExtractDynamic) Verify() error  { return nil }
 
 type OpVectorInsertDynamic struct {
-	IdResultType Id
-	IdResult     Id
-	Vector       Id
-	Component    Id
-	Index        Id
+	ResultType Id
+	ResultId   Id
+	Vector     Id
+	Component  Id
+	Index      Id
 }
 
 func (op *OpVectorInsertDynamic) Opcode() uint32 { return opcodeVectorInsertDynamic }
@@ -695,11 +695,11 @@ func (op *OpVectorInsertDynamic) Optional() bool { return false }
 func (op *OpVectorInsertDynamic) Verify() error  { return nil }
 
 type OpVectorShuffle struct {
-	IdResultType Id
-	IdResult     Id
-	Vector1      Id
-	Vector2      Id
-	Components   []uint32 `spirv:"optional"`
+	ResultType Id
+	ResultId   Id
+	Vector1    Id
+	Vector2    Id
+	Components []uint32 `spirv:"optional"`
 }
 
 func (op *OpVectorShuffle) Opcode() uint32 { return opcodeVectorShuffle }
@@ -707,8 +707,8 @@ func (op *OpVectorShuffle) Optional() bool { return false }
 func (op *OpVectorShuffle) Verify() error  { return nil }
 
 type OpCompositeConstruct struct {
-	IdResultType Id
-	IdResult     Id
+	ResultType   Id
+	ResultId     Id
 	Constituents []Id `spirv:"optional"`
 }
 
@@ -717,10 +717,10 @@ func (op *OpCompositeConstruct) Optional() bool { return false }
 func (op *OpCompositeConstruct) Verify() error  { return nil }
 
 type OpCompositeExtract struct {
-	IdResultType Id
-	IdResult     Id
-	Composite    Id
-	Indexes      []uint32 `spirv:"optional"`
+	ResultType Id
+	ResultId   Id
+	Composite  Id
+	Indexes    []uint32 `spirv:"optional"`
 }
 
 func (op *OpCompositeExtract) Opcode() uint32 { return opcodeCompositeExtract }
@@ -728,11 +728,11 @@ func (op *OpCompositeExtract) Optional() bool { return false }
 func (op *OpCompositeExtract) Verify() error  { return nil }
 
 type OpCompositeInsert struct {
-	IdResultType Id
-	IdResult     Id
-	Object       Id
-	Composite    Id
-	Indexes      []uint32 `spirv:"optional"`
+	ResultType Id
+	ResultId   Id
+	Object     Id
+	Composite  Id
+	Indexes    []uint32 `spirv:"optional"`
 }
 
 func (op *OpCompositeInsert) Opcode() uint32 { return opcodeCompositeInsert }
@@ -740,9 +740,9 @@ func (op *OpCompositeInsert) Optional() bool { return false }
 func (op *OpCompositeInsert) Verify() error  { return nil }
 
 type OpCopyObject struct {
-	IdResultType Id
-	IdResult     Id
-	Operand      Id
+	ResultType Id
+	ResultId   Id
+	Operand    Id
 }
 
 func (op *OpCopyObject) Opcode() uint32 { return opcodeCopyObject }
@@ -750,9 +750,9 @@ func (op *OpCopyObject) Optional() bool { return false }
 func (op *OpCopyObject) Verify() error  { return nil }
 
 type OpTranspose struct {
-	IdResultType Id
-	IdResult     Id
-	Matrix       Id
+	ResultType Id
+	ResultId   Id
+	Matrix     Id
 }
 
 func (op *OpTranspose) Opcode() uint32 { return opcodeTranspose }
@@ -760,10 +760,10 @@ func (op *OpTranspose) Optional() bool { return false }
 func (op *OpTranspose) Verify() error  { return nil }
 
 type OpSampledImage struct {
-	IdResultType Id
-	IdResult     Id
-	Image        Id
-	Sampler      Id
+	ResultType Id
+	ResultId   Id
+	Image      Id
+	Sampler    Id
 }
 
 func (op *OpSampledImage) Opcode() uint32 { return opcodeSampledImage }
@@ -771,8 +771,8 @@ func (op *OpSampledImage) Optional() bool { return false }
 func (op *OpSampledImage) Verify() error  { return nil }
 
 type OpImageSampleImplicitLod struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	SampledImage  Id
 	Coordinate    Id
 	ImageOperands ImageOperands `spirv:"optional"`
@@ -783,8 +783,8 @@ func (op *OpImageSampleImplicitLod) Optional() bool { return false }
 func (op *OpImageSampleImplicitLod) Verify() error  { return nil }
 
 type OpImageSampleExplicitLod struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	SampledImage  Id
 	Coordinate    Id
 	ImageOperands ImageOperands
@@ -795,8 +795,8 @@ func (op *OpImageSampleExplicitLod) Optional() bool { return false }
 func (op *OpImageSampleExplicitLod) Verify() error  { return nil }
 
 type OpImageSampleDrefImplicitLod struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	SampledImage  Id
 	Coordinate    Id
 	D_ref_        Id
@@ -808,8 +808,8 @@ func (op *OpImageSampleDrefImplicitLod) Optional() bool { return false }
 func (op *OpImageSampleDrefImplicitLod) Verify() error  { return nil }
 
 type OpImageSampleDrefExplicitLod struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	SampledImage  Id
 	Coordinate    Id
 	D_ref_        Id
@@ -821,8 +821,8 @@ func (op *OpImageSampleDrefExplicitLod) Optional() bool { return false }
 func (op *OpImageSampleDrefExplicitLod) Verify() error  { return nil }
 
 type OpImageSampleProjImplicitLod struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	SampledImage  Id
 	Coordinate    Id
 	ImageOperands ImageOperands `spirv:"optional"`
@@ -833,8 +833,8 @@ func (op *OpImageSampleProjImplicitLod) Optional() bool { return false }
 func (op *OpImageSampleProjImplicitLod) Verify() error  { return nil }
 
 type OpImageSampleProjExplicitLod struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	SampledImage  Id
 	Coordinate    Id
 	ImageOperands ImageOperands
@@ -845,8 +845,8 @@ func (op *OpImageSampleProjExplicitLod) Optional() bool { return false }
 func (op *OpImageSampleProjExplicitLod) Verify() error  { return nil }
 
 type OpImageSampleProjDrefImplicitLod struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	SampledImage  Id
 	Coordinate    Id
 	D_ref_        Id
@@ -860,8 +860,8 @@ func (op *OpImageSampleProjDrefImplicitLod) Optional() bool { return false }
 func (op *OpImageSampleProjDrefImplicitLod) Verify() error  { return nil }
 
 type OpImageSampleProjDrefExplicitLod struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	SampledImage  Id
 	Coordinate    Id
 	D_ref_        Id
@@ -875,8 +875,8 @@ func (op *OpImageSampleProjDrefExplicitLod) Optional() bool { return false }
 func (op *OpImageSampleProjDrefExplicitLod) Verify() error  { return nil }
 
 type OpImageFetch struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	Image         Id
 	Coordinate    Id
 	ImageOperands ImageOperands `spirv:"optional"`
@@ -887,8 +887,8 @@ func (op *OpImageFetch) Optional() bool { return false }
 func (op *OpImageFetch) Verify() error  { return nil }
 
 type OpImageGather struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	SampledImage  Id
 	Coordinate    Id
 	Component     Id
@@ -900,8 +900,8 @@ func (op *OpImageGather) Optional() bool { return false }
 func (op *OpImageGather) Verify() error  { return nil }
 
 type OpImageDrefGather struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	SampledImage  Id
 	Coordinate    Id
 	D_ref_        Id
@@ -913,8 +913,8 @@ func (op *OpImageDrefGather) Optional() bool { return false }
 func (op *OpImageDrefGather) Verify() error  { return nil }
 
 type OpImageRead struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	Image         Id
 	Coordinate    Id
 	ImageOperands ImageOperands `spirv:"optional"`
@@ -936,8 +936,8 @@ func (op *OpImageWrite) Optional() bool { return false }
 func (op *OpImageWrite) Verify() error  { return nil }
 
 type OpImage struct {
-	IdResultType Id
-	IdResult     Id
+	ResultType   Id
+	ResultId     Id
 	SampledImage Id
 }
 
@@ -946,9 +946,9 @@ func (op *OpImage) Optional() bool { return false }
 func (op *OpImage) Verify() error  { return nil }
 
 type OpImageQueryFormat struct {
-	IdResultType Id
-	IdResult     Id
-	Image        Id
+	ResultType Id
+	ResultId   Id
+	Image      Id
 }
 
 func (op *OpImageQueryFormat) Opcode() uint32 { return opcodeImageQueryFormat }
@@ -956,9 +956,9 @@ func (op *OpImageQueryFormat) Optional() bool { return false }
 func (op *OpImageQueryFormat) Verify() error  { return nil }
 
 type OpImageQueryOrder struct {
-	IdResultType Id
-	IdResult     Id
-	Image        Id
+	ResultType Id
+	ResultId   Id
+	Image      Id
 }
 
 func (op *OpImageQueryOrder) Opcode() uint32 { return opcodeImageQueryOrder }
@@ -966,8 +966,8 @@ func (op *OpImageQueryOrder) Optional() bool { return false }
 func (op *OpImageQueryOrder) Verify() error  { return nil }
 
 type OpImageQuerySizeLod struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	Image         Id
 	LevelOfDetail Id
 }
@@ -977,9 +977,9 @@ func (op *OpImageQuerySizeLod) Optional() bool { return false }
 func (op *OpImageQuerySizeLod) Verify() error  { return nil }
 
 type OpImageQuerySize struct {
-	IdResultType Id
-	IdResult     Id
-	Image        Id
+	ResultType Id
+	ResultId   Id
+	Image      Id
 }
 
 func (op *OpImageQuerySize) Opcode() uint32 { return opcodeImageQuerySize }
@@ -987,8 +987,8 @@ func (op *OpImageQuerySize) Optional() bool { return false }
 func (op *OpImageQuerySize) Verify() error  { return nil }
 
 type OpImageQueryLod struct {
-	IdResultType Id
-	IdResult     Id
+	ResultType   Id
+	ResultId     Id
 	SampledImage Id
 	Coordinate   Id
 }
@@ -998,9 +998,9 @@ func (op *OpImageQueryLod) Optional() bool { return false }
 func (op *OpImageQueryLod) Verify() error  { return nil }
 
 type OpImageQueryLevels struct {
-	IdResultType Id
-	IdResult     Id
-	Image        Id
+	ResultType Id
+	ResultId   Id
+	Image      Id
 }
 
 func (op *OpImageQueryLevels) Opcode() uint32 { return opcodeImageQueryLevels }
@@ -1008,9 +1008,9 @@ func (op *OpImageQueryLevels) Optional() bool { return false }
 func (op *OpImageQueryLevels) Verify() error  { return nil }
 
 type OpImageQuerySamples struct {
-	IdResultType Id
-	IdResult     Id
-	Image        Id
+	ResultType Id
+	ResultId   Id
+	Image      Id
 }
 
 func (op *OpImageQuerySamples) Opcode() uint32 { return opcodeImageQuerySamples }
@@ -1018,9 +1018,9 @@ func (op *OpImageQuerySamples) Optional() bool { return false }
 func (op *OpImageQuerySamples) Verify() error  { return nil }
 
 type OpConvertFToU struct {
-	IdResultType Id
-	IdResult     Id
-	FloatValue   Id
+	ResultType Id
+	ResultId   Id
+	FloatValue Id
 }
 
 func (op *OpConvertFToU) Opcode() uint32 { return opcodeConvertFToU }
@@ -1028,9 +1028,9 @@ func (op *OpConvertFToU) Optional() bool { return false }
 func (op *OpConvertFToU) Verify() error  { return nil }
 
 type OpConvertFToS struct {
-	IdResultType Id
-	IdResult     Id
-	FloatValue   Id
+	ResultType Id
+	ResultId   Id
+	FloatValue Id
 }
 
 func (op *OpConvertFToS) Opcode() uint32 { return opcodeConvertFToS }
@@ -1038,9 +1038,9 @@ func (op *OpConvertFToS) Optional() bool { return false }
 func (op *OpConvertFToS) Verify() error  { return nil }
 
 type OpConvertSToF struct {
-	IdResultType Id
-	IdResult     Id
-	SignedValue  Id
+	ResultType  Id
+	ResultId    Id
+	SignedValue Id
 }
 
 func (op *OpConvertSToF) Opcode() uint32 { return opcodeConvertSToF }
@@ -1048,8 +1048,8 @@ func (op *OpConvertSToF) Optional() bool { return false }
 func (op *OpConvertSToF) Verify() error  { return nil }
 
 type OpConvertUToF struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	UnsignedValue Id
 }
 
@@ -1058,8 +1058,8 @@ func (op *OpConvertUToF) Optional() bool { return false }
 func (op *OpConvertUToF) Verify() error  { return nil }
 
 type OpUConvert struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	UnsignedValue Id
 }
 
@@ -1068,9 +1068,9 @@ func (op *OpUConvert) Optional() bool { return false }
 func (op *OpUConvert) Verify() error  { return nil }
 
 type OpSConvert struct {
-	IdResultType Id
-	IdResult     Id
-	SignedValue  Id
+	ResultType  Id
+	ResultId    Id
+	SignedValue Id
 }
 
 func (op *OpSConvert) Opcode() uint32 { return opcodeSConvert }
@@ -1078,9 +1078,9 @@ func (op *OpSConvert) Optional() bool { return false }
 func (op *OpSConvert) Verify() error  { return nil }
 
 type OpFConvert struct {
-	IdResultType Id
-	IdResult     Id
-	FloatValue   Id
+	ResultType Id
+	ResultId   Id
+	FloatValue Id
 }
 
 func (op *OpFConvert) Opcode() uint32 { return opcodeFConvert }
@@ -1088,9 +1088,9 @@ func (op *OpFConvert) Optional() bool { return false }
 func (op *OpFConvert) Verify() error  { return nil }
 
 type OpQuantizeToF16 struct {
-	IdResultType Id
-	IdResult     Id
-	Value        Id
+	ResultType Id
+	ResultId   Id
+	Value      Id
 }
 
 func (op *OpQuantizeToF16) Opcode() uint32 { return opcodeQuantizeToF16 }
@@ -1098,9 +1098,9 @@ func (op *OpQuantizeToF16) Optional() bool { return false }
 func (op *OpQuantizeToF16) Verify() error  { return nil }
 
 type OpConvertPtrToU struct {
-	IdResultType Id
-	IdResult     Id
-	Pointer      Id
+	ResultType Id
+	ResultId   Id
+	Pointer    Id
 }
 
 func (op *OpConvertPtrToU) Opcode() uint32 { return opcodeConvertPtrToU }
@@ -1108,9 +1108,9 @@ func (op *OpConvertPtrToU) Optional() bool { return false }
 func (op *OpConvertPtrToU) Verify() error  { return nil }
 
 type OpSatConvertSToU struct {
-	IdResultType Id
-	IdResult     Id
-	SignedValue  Id
+	ResultType  Id
+	ResultId    Id
+	SignedValue Id
 }
 
 func (op *OpSatConvertSToU) Opcode() uint32 { return opcodeSatConvertSToU }
@@ -1118,8 +1118,8 @@ func (op *OpSatConvertSToU) Optional() bool { return false }
 func (op *OpSatConvertSToU) Verify() error  { return nil }
 
 type OpSatConvertUToS struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	UnsignedValue Id
 }
 
@@ -1128,8 +1128,8 @@ func (op *OpSatConvertUToS) Optional() bool { return false }
 func (op *OpSatConvertUToS) Verify() error  { return nil }
 
 type OpConvertUToPtr struct {
-	IdResultType Id
-	IdResult     Id
+	ResultType   Id
+	ResultId     Id
 	IntegerValue Id
 }
 
@@ -1138,9 +1138,9 @@ func (op *OpConvertUToPtr) Optional() bool { return false }
 func (op *OpConvertUToPtr) Verify() error  { return nil }
 
 type OpPtrCastToGeneric struct {
-	IdResultType Id
-	IdResult     Id
-	Pointer      Id
+	ResultType Id
+	ResultId   Id
+	Pointer    Id
 }
 
 func (op *OpPtrCastToGeneric) Opcode() uint32 { return opcodePtrCastToGeneric }
@@ -1148,9 +1148,9 @@ func (op *OpPtrCastToGeneric) Optional() bool { return false }
 func (op *OpPtrCastToGeneric) Verify() error  { return nil }
 
 type OpGenericCastToPtr struct {
-	IdResultType Id
-	IdResult     Id
-	Pointer      Id
+	ResultType Id
+	ResultId   Id
+	Pointer    Id
 }
 
 func (op *OpGenericCastToPtr) Opcode() uint32 { return opcodeGenericCastToPtr }
@@ -1158,10 +1158,10 @@ func (op *OpGenericCastToPtr) Optional() bool { return false }
 func (op *OpGenericCastToPtr) Verify() error  { return nil }
 
 type OpGenericCastToPtrExplicit struct {
-	IdResultType Id
-	IdResult     Id
-	Pointer      Id
-	Storage      StorageClass
+	ResultType Id
+	ResultId   Id
+	Pointer    Id
+	Storage    StorageClass
 }
 
 func (op *OpGenericCastToPtrExplicit) Opcode() uint32 { return opcodeGenericCastToPtrExplicit }
@@ -1169,9 +1169,9 @@ func (op *OpGenericCastToPtrExplicit) Optional() bool { return false }
 func (op *OpGenericCastToPtrExplicit) Verify() error  { return nil }
 
 type OpBitcast struct {
-	IdResultType Id
-	IdResult     Id
-	Operand      Id
+	ResultType Id
+	ResultId   Id
+	Operand    Id
 }
 
 func (op *OpBitcast) Opcode() uint32 { return opcodeBitcast }
@@ -1179,9 +1179,9 @@ func (op *OpBitcast) Optional() bool { return false }
 func (op *OpBitcast) Verify() error  { return nil }
 
 type OpSNegate struct {
-	IdResultType Id
-	IdResult     Id
-	Operand      Id
+	ResultType Id
+	ResultId   Id
+	Operand    Id
 }
 
 func (op *OpSNegate) Opcode() uint32 { return opcodeSNegate }
@@ -1189,9 +1189,9 @@ func (op *OpSNegate) Optional() bool { return false }
 func (op *OpSNegate) Verify() error  { return nil }
 
 type OpFNegate struct {
-	IdResultType Id
-	IdResult     Id
-	Operand      Id
+	ResultType Id
+	ResultId   Id
+	Operand    Id
 }
 
 func (op *OpFNegate) Opcode() uint32 { return opcodeFNegate }
@@ -1199,10 +1199,10 @@ func (op *OpFNegate) Optional() bool { return false }
 func (op *OpFNegate) Verify() error  { return nil }
 
 type OpIAdd struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpIAdd) Opcode() uint32 { return opcodeIAdd }
@@ -1210,10 +1210,10 @@ func (op *OpIAdd) Optional() bool { return false }
 func (op *OpIAdd) Verify() error  { return nil }
 
 type OpFAdd struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpFAdd) Opcode() uint32 { return opcodeFAdd }
@@ -1221,10 +1221,10 @@ func (op *OpFAdd) Optional() bool { return false }
 func (op *OpFAdd) Verify() error  { return nil }
 
 type OpISub struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpISub) Opcode() uint32 { return opcodeISub }
@@ -1232,10 +1232,10 @@ func (op *OpISub) Optional() bool { return false }
 func (op *OpISub) Verify() error  { return nil }
 
 type OpFSub struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpFSub) Opcode() uint32 { return opcodeFSub }
@@ -1243,10 +1243,10 @@ func (op *OpFSub) Optional() bool { return false }
 func (op *OpFSub) Verify() error  { return nil }
 
 type OpIMul struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpIMul) Opcode() uint32 { return opcodeIMul }
@@ -1254,10 +1254,10 @@ func (op *OpIMul) Optional() bool { return false }
 func (op *OpIMul) Verify() error  { return nil }
 
 type OpFMul struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpFMul) Opcode() uint32 { return opcodeFMul }
@@ -1265,10 +1265,10 @@ func (op *OpFMul) Optional() bool { return false }
 func (op *OpFMul) Verify() error  { return nil }
 
 type OpUDiv struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpUDiv) Opcode() uint32 { return opcodeUDiv }
@@ -1276,10 +1276,10 @@ func (op *OpUDiv) Optional() bool { return false }
 func (op *OpUDiv) Verify() error  { return nil }
 
 type OpSDiv struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpSDiv) Opcode() uint32 { return opcodeSDiv }
@@ -1287,10 +1287,10 @@ func (op *OpSDiv) Optional() bool { return false }
 func (op *OpSDiv) Verify() error  { return nil }
 
 type OpFDiv struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpFDiv) Opcode() uint32 { return opcodeFDiv }
@@ -1298,10 +1298,10 @@ func (op *OpFDiv) Optional() bool { return false }
 func (op *OpFDiv) Verify() error  { return nil }
 
 type OpUMod struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpUMod) Opcode() uint32 { return opcodeUMod }
@@ -1309,10 +1309,10 @@ func (op *OpUMod) Optional() bool { return false }
 func (op *OpUMod) Verify() error  { return nil }
 
 type OpSRem struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpSRem) Opcode() uint32 { return opcodeSRem }
@@ -1320,10 +1320,10 @@ func (op *OpSRem) Optional() bool { return false }
 func (op *OpSRem) Verify() error  { return nil }
 
 type OpSMod struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpSMod) Opcode() uint32 { return opcodeSMod }
@@ -1331,10 +1331,10 @@ func (op *OpSMod) Optional() bool { return false }
 func (op *OpSMod) Verify() error  { return nil }
 
 type OpFRem struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpFRem) Opcode() uint32 { return opcodeFRem }
@@ -1342,10 +1342,10 @@ func (op *OpFRem) Optional() bool { return false }
 func (op *OpFRem) Verify() error  { return nil }
 
 type OpFMod struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpFMod) Opcode() uint32 { return opcodeFMod }
@@ -1353,10 +1353,10 @@ func (op *OpFMod) Optional() bool { return false }
 func (op *OpFMod) Verify() error  { return nil }
 
 type OpVectorTimesScalar struct {
-	IdResultType Id
-	IdResult     Id
-	Vector       Id
-	Scalar       Id
+	ResultType Id
+	ResultId   Id
+	Vector     Id
+	Scalar     Id
 }
 
 func (op *OpVectorTimesScalar) Opcode() uint32 { return opcodeVectorTimesScalar }
@@ -1364,10 +1364,10 @@ func (op *OpVectorTimesScalar) Optional() bool { return false }
 func (op *OpVectorTimesScalar) Verify() error  { return nil }
 
 type OpMatrixTimesScalar struct {
-	IdResultType Id
-	IdResult     Id
-	Matrix       Id
-	Scalar       Id
+	ResultType Id
+	ResultId   Id
+	Matrix     Id
+	Scalar     Id
 }
 
 func (op *OpMatrixTimesScalar) Opcode() uint32 { return opcodeMatrixTimesScalar }
@@ -1375,10 +1375,10 @@ func (op *OpMatrixTimesScalar) Optional() bool { return false }
 func (op *OpMatrixTimesScalar) Verify() error  { return nil }
 
 type OpVectorTimesMatrix struct {
-	IdResultType Id
-	IdResult     Id
-	Vector       Id
-	Matrix       Id
+	ResultType Id
+	ResultId   Id
+	Vector     Id
+	Matrix     Id
 }
 
 func (op *OpVectorTimesMatrix) Opcode() uint32 { return opcodeVectorTimesMatrix }
@@ -1386,10 +1386,10 @@ func (op *OpVectorTimesMatrix) Optional() bool { return false }
 func (op *OpVectorTimesMatrix) Verify() error  { return nil }
 
 type OpMatrixTimesVector struct {
-	IdResultType Id
-	IdResult     Id
-	Matrix       Id
-	Vector       Id
+	ResultType Id
+	ResultId   Id
+	Matrix     Id
+	Vector     Id
 }
 
 func (op *OpMatrixTimesVector) Opcode() uint32 { return opcodeMatrixTimesVector }
@@ -1397,10 +1397,10 @@ func (op *OpMatrixTimesVector) Optional() bool { return false }
 func (op *OpMatrixTimesVector) Verify() error  { return nil }
 
 type OpMatrixTimesMatrix struct {
-	IdResultType Id
-	IdResult     Id
-	LeftMatrix   Id
-	RightMatrix  Id
+	ResultType  Id
+	ResultId    Id
+	LeftMatrix  Id
+	RightMatrix Id
 }
 
 func (op *OpMatrixTimesMatrix) Opcode() uint32 { return opcodeMatrixTimesMatrix }
@@ -1408,10 +1408,10 @@ func (op *OpMatrixTimesMatrix) Optional() bool { return false }
 func (op *OpMatrixTimesMatrix) Verify() error  { return nil }
 
 type OpOuterProduct struct {
-	IdResultType Id
-	IdResult     Id
-	Vector1      Id
-	Vector2      Id
+	ResultType Id
+	ResultId   Id
+	Vector1    Id
+	Vector2    Id
 }
 
 func (op *OpOuterProduct) Opcode() uint32 { return opcodeOuterProduct }
@@ -1419,10 +1419,10 @@ func (op *OpOuterProduct) Optional() bool { return false }
 func (op *OpOuterProduct) Verify() error  { return nil }
 
 type OpDot struct {
-	IdResultType Id
-	IdResult     Id
-	Vector1      Id
-	Vector2      Id
+	ResultType Id
+	ResultId   Id
+	Vector1    Id
+	Vector2    Id
 }
 
 func (op *OpDot) Opcode() uint32 { return opcodeDot }
@@ -1430,10 +1430,10 @@ func (op *OpDot) Optional() bool { return false }
 func (op *OpDot) Verify() error  { return nil }
 
 type OpIAddCarry struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpIAddCarry) Opcode() uint32 { return opcodeIAddCarry }
@@ -1441,10 +1441,10 @@ func (op *OpIAddCarry) Optional() bool { return false }
 func (op *OpIAddCarry) Verify() error  { return nil }
 
 type OpISubBorrow struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpISubBorrow) Opcode() uint32 { return opcodeISubBorrow }
@@ -1452,10 +1452,10 @@ func (op *OpISubBorrow) Optional() bool { return false }
 func (op *OpISubBorrow) Verify() error  { return nil }
 
 type OpUMulExtended struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpUMulExtended) Opcode() uint32 { return opcodeUMulExtended }
@@ -1463,10 +1463,10 @@ func (op *OpUMulExtended) Optional() bool { return false }
 func (op *OpUMulExtended) Verify() error  { return nil }
 
 type OpSMulExtended struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpSMulExtended) Opcode() uint32 { return opcodeSMulExtended }
@@ -1474,9 +1474,9 @@ func (op *OpSMulExtended) Optional() bool { return false }
 func (op *OpSMulExtended) Verify() error  { return nil }
 
 type OpAny struct {
-	IdResultType Id
-	IdResult     Id
-	Vector       Id
+	ResultType Id
+	ResultId   Id
+	Vector     Id
 }
 
 func (op *OpAny) Opcode() uint32 { return opcodeAny }
@@ -1484,9 +1484,9 @@ func (op *OpAny) Optional() bool { return false }
 func (op *OpAny) Verify() error  { return nil }
 
 type OpAll struct {
-	IdResultType Id
-	IdResult     Id
-	Vector       Id
+	ResultType Id
+	ResultId   Id
+	Vector     Id
 }
 
 func (op *OpAll) Opcode() uint32 { return opcodeAll }
@@ -1494,9 +1494,9 @@ func (op *OpAll) Optional() bool { return false }
 func (op *OpAll) Verify() error  { return nil }
 
 type OpIsNan struct {
-	IdResultType Id
-	IdResult     Id
-	x            Id
+	ResultType Id
+	ResultId   Id
+	x          Id
 }
 
 func (op *OpIsNan) Opcode() uint32 { return opcodeIsNan }
@@ -1504,9 +1504,9 @@ func (op *OpIsNan) Optional() bool { return false }
 func (op *OpIsNan) Verify() error  { return nil }
 
 type OpIsInf struct {
-	IdResultType Id
-	IdResult     Id
-	x            Id
+	ResultType Id
+	ResultId   Id
+	x          Id
 }
 
 func (op *OpIsInf) Opcode() uint32 { return opcodeIsInf }
@@ -1514,9 +1514,9 @@ func (op *OpIsInf) Optional() bool { return false }
 func (op *OpIsInf) Verify() error  { return nil }
 
 type OpIsFinite struct {
-	IdResultType Id
-	IdResult     Id
-	x            Id
+	ResultType Id
+	ResultId   Id
+	x          Id
 }
 
 func (op *OpIsFinite) Opcode() uint32 { return opcodeIsFinite }
@@ -1524,9 +1524,9 @@ func (op *OpIsFinite) Optional() bool { return false }
 func (op *OpIsFinite) Verify() error  { return nil }
 
 type OpIsNormal struct {
-	IdResultType Id
-	IdResult     Id
-	x            Id
+	ResultType Id
+	ResultId   Id
+	x          Id
 }
 
 func (op *OpIsNormal) Opcode() uint32 { return opcodeIsNormal }
@@ -1534,9 +1534,9 @@ func (op *OpIsNormal) Optional() bool { return false }
 func (op *OpIsNormal) Verify() error  { return nil }
 
 type OpSignBitSet struct {
-	IdResultType Id
-	IdResult     Id
-	x            Id
+	ResultType Id
+	ResultId   Id
+	x          Id
 }
 
 func (op *OpSignBitSet) Opcode() uint32 { return opcodeSignBitSet }
@@ -1544,10 +1544,10 @@ func (op *OpSignBitSet) Optional() bool { return false }
 func (op *OpSignBitSet) Verify() error  { return nil }
 
 type OpLessOrGreater struct {
-	IdResultType Id
-	IdResult     Id
-	x            Id
-	y            Id
+	ResultType Id
+	ResultId   Id
+	x          Id
+	y          Id
 }
 
 func (op *OpLessOrGreater) Opcode() uint32 { return opcodeLessOrGreater }
@@ -1555,10 +1555,10 @@ func (op *OpLessOrGreater) Optional() bool { return false }
 func (op *OpLessOrGreater) Verify() error  { return nil }
 
 type OpOrdered struct {
-	IdResultType Id
-	IdResult     Id
-	x            Id
-	y            Id
+	ResultType Id
+	ResultId   Id
+	x          Id
+	y          Id
 }
 
 func (op *OpOrdered) Opcode() uint32 { return opcodeOrdered }
@@ -1566,10 +1566,10 @@ func (op *OpOrdered) Optional() bool { return false }
 func (op *OpOrdered) Verify() error  { return nil }
 
 type OpUnordered struct {
-	IdResultType Id
-	IdResult     Id
-	x            Id
-	y            Id
+	ResultType Id
+	ResultId   Id
+	x          Id
+	y          Id
 }
 
 func (op *OpUnordered) Opcode() uint32 { return opcodeUnordered }
@@ -1577,10 +1577,10 @@ func (op *OpUnordered) Optional() bool { return false }
 func (op *OpUnordered) Verify() error  { return nil }
 
 type OpLogicalEqual struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpLogicalEqual) Opcode() uint32 { return opcodeLogicalEqual }
@@ -1588,10 +1588,10 @@ func (op *OpLogicalEqual) Optional() bool { return false }
 func (op *OpLogicalEqual) Verify() error  { return nil }
 
 type OpLogicalNotEqual struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpLogicalNotEqual) Opcode() uint32 { return opcodeLogicalNotEqual }
@@ -1599,10 +1599,10 @@ func (op *OpLogicalNotEqual) Optional() bool { return false }
 func (op *OpLogicalNotEqual) Verify() error  { return nil }
 
 type OpLogicalOr struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpLogicalOr) Opcode() uint32 { return opcodeLogicalOr }
@@ -1610,10 +1610,10 @@ func (op *OpLogicalOr) Optional() bool { return false }
 func (op *OpLogicalOr) Verify() error  { return nil }
 
 type OpLogicalAnd struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpLogicalAnd) Opcode() uint32 { return opcodeLogicalAnd }
@@ -1621,9 +1621,9 @@ func (op *OpLogicalAnd) Optional() bool { return false }
 func (op *OpLogicalAnd) Verify() error  { return nil }
 
 type OpLogicalNot struct {
-	IdResultType Id
-	IdResult     Id
-	Operand      Id
+	ResultType Id
+	ResultId   Id
+	Operand    Id
 }
 
 func (op *OpLogicalNot) Opcode() uint32 { return opcodeLogicalNot }
@@ -1631,11 +1631,11 @@ func (op *OpLogicalNot) Optional() bool { return false }
 func (op *OpLogicalNot) Verify() error  { return nil }
 
 type OpSelect struct {
-	IdResultType Id
-	IdResult     Id
-	Condition    Id
-	Object1      Id
-	Object2      Id
+	ResultType Id
+	ResultId   Id
+	Condition  Id
+	Object1    Id
+	Object2    Id
 }
 
 func (op *OpSelect) Opcode() uint32 { return opcodeSelect }
@@ -1643,10 +1643,10 @@ func (op *OpSelect) Optional() bool { return false }
 func (op *OpSelect) Verify() error  { return nil }
 
 type OpIEqual struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpIEqual) Opcode() uint32 { return opcodeIEqual }
@@ -1654,10 +1654,10 @@ func (op *OpIEqual) Optional() bool { return false }
 func (op *OpIEqual) Verify() error  { return nil }
 
 type OpINotEqual struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpINotEqual) Opcode() uint32 { return opcodeINotEqual }
@@ -1665,10 +1665,10 @@ func (op *OpINotEqual) Optional() bool { return false }
 func (op *OpINotEqual) Verify() error  { return nil }
 
 type OpUGreaterThan struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpUGreaterThan) Opcode() uint32 { return opcodeUGreaterThan }
@@ -1676,10 +1676,10 @@ func (op *OpUGreaterThan) Optional() bool { return false }
 func (op *OpUGreaterThan) Verify() error  { return nil }
 
 type OpSGreaterThan struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpSGreaterThan) Opcode() uint32 { return opcodeSGreaterThan }
@@ -1687,10 +1687,10 @@ func (op *OpSGreaterThan) Optional() bool { return false }
 func (op *OpSGreaterThan) Verify() error  { return nil }
 
 type OpUGreaterThanEqual struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpUGreaterThanEqual) Opcode() uint32 { return opcodeUGreaterThanEqual }
@@ -1698,10 +1698,10 @@ func (op *OpUGreaterThanEqual) Optional() bool { return false }
 func (op *OpUGreaterThanEqual) Verify() error  { return nil }
 
 type OpSGreaterThanEqual struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpSGreaterThanEqual) Opcode() uint32 { return opcodeSGreaterThanEqual }
@@ -1709,10 +1709,10 @@ func (op *OpSGreaterThanEqual) Optional() bool { return false }
 func (op *OpSGreaterThanEqual) Verify() error  { return nil }
 
 type OpULessThan struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpULessThan) Opcode() uint32 { return opcodeULessThan }
@@ -1720,10 +1720,10 @@ func (op *OpULessThan) Optional() bool { return false }
 func (op *OpULessThan) Verify() error  { return nil }
 
 type OpSLessThan struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpSLessThan) Opcode() uint32 { return opcodeSLessThan }
@@ -1731,10 +1731,10 @@ func (op *OpSLessThan) Optional() bool { return false }
 func (op *OpSLessThan) Verify() error  { return nil }
 
 type OpULessThanEqual struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpULessThanEqual) Opcode() uint32 { return opcodeULessThanEqual }
@@ -1742,10 +1742,10 @@ func (op *OpULessThanEqual) Optional() bool { return false }
 func (op *OpULessThanEqual) Verify() error  { return nil }
 
 type OpSLessThanEqual struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpSLessThanEqual) Opcode() uint32 { return opcodeSLessThanEqual }
@@ -1753,10 +1753,10 @@ func (op *OpSLessThanEqual) Optional() bool { return false }
 func (op *OpSLessThanEqual) Verify() error  { return nil }
 
 type OpFOrdEqual struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpFOrdEqual) Opcode() uint32 { return opcodeFOrdEqual }
@@ -1764,10 +1764,10 @@ func (op *OpFOrdEqual) Optional() bool { return false }
 func (op *OpFOrdEqual) Verify() error  { return nil }
 
 type OpFUnordEqual struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpFUnordEqual) Opcode() uint32 { return opcodeFUnordEqual }
@@ -1775,10 +1775,10 @@ func (op *OpFUnordEqual) Optional() bool { return false }
 func (op *OpFUnordEqual) Verify() error  { return nil }
 
 type OpFOrdNotEqual struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpFOrdNotEqual) Opcode() uint32 { return opcodeFOrdNotEqual }
@@ -1786,10 +1786,10 @@ func (op *OpFOrdNotEqual) Optional() bool { return false }
 func (op *OpFOrdNotEqual) Verify() error  { return nil }
 
 type OpFUnordNotEqual struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpFUnordNotEqual) Opcode() uint32 { return opcodeFUnordNotEqual }
@@ -1797,10 +1797,10 @@ func (op *OpFUnordNotEqual) Optional() bool { return false }
 func (op *OpFUnordNotEqual) Verify() error  { return nil }
 
 type OpFOrdLessThan struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpFOrdLessThan) Opcode() uint32 { return opcodeFOrdLessThan }
@@ -1808,10 +1808,10 @@ func (op *OpFOrdLessThan) Optional() bool { return false }
 func (op *OpFOrdLessThan) Verify() error  { return nil }
 
 type OpFUnordLessThan struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpFUnordLessThan) Opcode() uint32 { return opcodeFUnordLessThan }
@@ -1819,10 +1819,10 @@ func (op *OpFUnordLessThan) Optional() bool { return false }
 func (op *OpFUnordLessThan) Verify() error  { return nil }
 
 type OpFOrdGreaterThan struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpFOrdGreaterThan) Opcode() uint32 { return opcodeFOrdGreaterThan }
@@ -1830,10 +1830,10 @@ func (op *OpFOrdGreaterThan) Optional() bool { return false }
 func (op *OpFOrdGreaterThan) Verify() error  { return nil }
 
 type OpFUnordGreaterThan struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpFUnordGreaterThan) Opcode() uint32 { return opcodeFUnordGreaterThan }
@@ -1841,10 +1841,10 @@ func (op *OpFUnordGreaterThan) Optional() bool { return false }
 func (op *OpFUnordGreaterThan) Verify() error  { return nil }
 
 type OpFOrdLessThanEqual struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpFOrdLessThanEqual) Opcode() uint32 { return opcodeFOrdLessThanEqual }
@@ -1852,10 +1852,10 @@ func (op *OpFOrdLessThanEqual) Optional() bool { return false }
 func (op *OpFOrdLessThanEqual) Verify() error  { return nil }
 
 type OpFUnordLessThanEqual struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpFUnordLessThanEqual) Opcode() uint32 { return opcodeFUnordLessThanEqual }
@@ -1863,10 +1863,10 @@ func (op *OpFUnordLessThanEqual) Optional() bool { return false }
 func (op *OpFUnordLessThanEqual) Verify() error  { return nil }
 
 type OpFOrdGreaterThanEqual struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpFOrdGreaterThanEqual) Opcode() uint32 { return opcodeFOrdGreaterThanEqual }
@@ -1874,10 +1874,10 @@ func (op *OpFOrdGreaterThanEqual) Optional() bool { return false }
 func (op *OpFOrdGreaterThanEqual) Verify() error  { return nil }
 
 type OpFUnordGreaterThanEqual struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpFUnordGreaterThanEqual) Opcode() uint32 { return opcodeFUnordGreaterThanEqual }
@@ -1885,10 +1885,10 @@ func (op *OpFUnordGreaterThanEqual) Optional() bool { return false }
 func (op *OpFUnordGreaterThanEqual) Verify() error  { return nil }
 
 type OpShiftRightLogical struct {
-	IdResultType Id
-	IdResult     Id
-	Base         Id
-	Shift        Id
+	ResultType Id
+	ResultId   Id
+	Base       Id
+	Shift      Id
 }
 
 func (op *OpShiftRightLogical) Opcode() uint32 { return opcodeShiftRightLogical }
@@ -1896,10 +1896,10 @@ func (op *OpShiftRightLogical) Optional() bool { return false }
 func (op *OpShiftRightLogical) Verify() error  { return nil }
 
 type OpShiftRightArithmetic struct {
-	IdResultType Id
-	IdResult     Id
-	Base         Id
-	Shift        Id
+	ResultType Id
+	ResultId   Id
+	Base       Id
+	Shift      Id
 }
 
 func (op *OpShiftRightArithmetic) Opcode() uint32 { return opcodeShiftRightArithmetic }
@@ -1907,10 +1907,10 @@ func (op *OpShiftRightArithmetic) Optional() bool { return false }
 func (op *OpShiftRightArithmetic) Verify() error  { return nil }
 
 type OpShiftLeftLogical struct {
-	IdResultType Id
-	IdResult     Id
-	Base         Id
-	Shift        Id
+	ResultType Id
+	ResultId   Id
+	Base       Id
+	Shift      Id
 }
 
 func (op *OpShiftLeftLogical) Opcode() uint32 { return opcodeShiftLeftLogical }
@@ -1918,10 +1918,10 @@ func (op *OpShiftLeftLogical) Optional() bool { return false }
 func (op *OpShiftLeftLogical) Verify() error  { return nil }
 
 type OpBitwiseOr struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpBitwiseOr) Opcode() uint32 { return opcodeBitwiseOr }
@@ -1929,10 +1929,10 @@ func (op *OpBitwiseOr) Optional() bool { return false }
 func (op *OpBitwiseOr) Verify() error  { return nil }
 
 type OpBitwiseXor struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpBitwiseXor) Opcode() uint32 { return opcodeBitwiseXor }
@@ -1940,10 +1940,10 @@ func (op *OpBitwiseXor) Optional() bool { return false }
 func (op *OpBitwiseXor) Verify() error  { return nil }
 
 type OpBitwiseAnd struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpBitwiseAnd) Opcode() uint32 { return opcodeBitwiseAnd }
@@ -1951,9 +1951,9 @@ func (op *OpBitwiseAnd) Optional() bool { return false }
 func (op *OpBitwiseAnd) Verify() error  { return nil }
 
 type OpNot struct {
-	IdResultType Id
-	IdResult     Id
-	Operand      Id
+	ResultType Id
+	ResultId   Id
+	Operand    Id
 }
 
 func (op *OpNot) Opcode() uint32 { return opcodeNot }
@@ -1961,12 +1961,12 @@ func (op *OpNot) Optional() bool { return false }
 func (op *OpNot) Verify() error  { return nil }
 
 type OpBitFieldInsert struct {
-	IdResultType Id
-	IdResult     Id
-	Base         Id
-	Insert       Id
-	Offset       Id
-	Count        Id
+	ResultType Id
+	ResultId   Id
+	Base       Id
+	Insert     Id
+	Offset     Id
+	Count      Id
 }
 
 func (op *OpBitFieldInsert) Opcode() uint32 { return opcodeBitFieldInsert }
@@ -1974,11 +1974,11 @@ func (op *OpBitFieldInsert) Optional() bool { return false }
 func (op *OpBitFieldInsert) Verify() error  { return nil }
 
 type OpBitFieldSExtract struct {
-	IdResultType Id
-	IdResult     Id
-	Base         Id
-	Offset       Id
-	Count        Id
+	ResultType Id
+	ResultId   Id
+	Base       Id
+	Offset     Id
+	Count      Id
 }
 
 func (op *OpBitFieldSExtract) Opcode() uint32 { return opcodeBitFieldSExtract }
@@ -1986,11 +1986,11 @@ func (op *OpBitFieldSExtract) Optional() bool { return false }
 func (op *OpBitFieldSExtract) Verify() error  { return nil }
 
 type OpBitFieldUExtract struct {
-	IdResultType Id
-	IdResult     Id
-	Base         Id
-	Offset       Id
-	Count        Id
+	ResultType Id
+	ResultId   Id
+	Base       Id
+	Offset     Id
+	Count      Id
 }
 
 func (op *OpBitFieldUExtract) Opcode() uint32 { return opcodeBitFieldUExtract }
@@ -1998,9 +1998,9 @@ func (op *OpBitFieldUExtract) Optional() bool { return false }
 func (op *OpBitFieldUExtract) Verify() error  { return nil }
 
 type OpBitReverse struct {
-	IdResultType Id
-	IdResult     Id
-	Base         Id
+	ResultType Id
+	ResultId   Id
+	Base       Id
 }
 
 func (op *OpBitReverse) Opcode() uint32 { return opcodeBitReverse }
@@ -2008,9 +2008,9 @@ func (op *OpBitReverse) Optional() bool { return false }
 func (op *OpBitReverse) Verify() error  { return nil }
 
 type OpBitCount struct {
-	IdResultType Id
-	IdResult     Id
-	Base         Id
+	ResultType Id
+	ResultId   Id
+	Base       Id
 }
 
 func (op *OpBitCount) Opcode() uint32 { return opcodeBitCount }
@@ -2018,9 +2018,9 @@ func (op *OpBitCount) Optional() bool { return false }
 func (op *OpBitCount) Verify() error  { return nil }
 
 type OpDPdx struct {
-	IdResultType Id
-	IdResult     Id
-	P            Id
+	ResultType Id
+	ResultId   Id
+	P          Id
 }
 
 func (op *OpDPdx) Opcode() uint32 { return opcodeDPdx }
@@ -2028,9 +2028,9 @@ func (op *OpDPdx) Optional() bool { return false }
 func (op *OpDPdx) Verify() error  { return nil }
 
 type OpDPdy struct {
-	IdResultType Id
-	IdResult     Id
-	P            Id
+	ResultType Id
+	ResultId   Id
+	P          Id
 }
 
 func (op *OpDPdy) Opcode() uint32 { return opcodeDPdy }
@@ -2038,9 +2038,9 @@ func (op *OpDPdy) Optional() bool { return false }
 func (op *OpDPdy) Verify() error  { return nil }
 
 type OpFwidth struct {
-	IdResultType Id
-	IdResult     Id
-	P            Id
+	ResultType Id
+	ResultId   Id
+	P          Id
 }
 
 func (op *OpFwidth) Opcode() uint32 { return opcodeFwidth }
@@ -2048,9 +2048,9 @@ func (op *OpFwidth) Optional() bool { return false }
 func (op *OpFwidth) Verify() error  { return nil }
 
 type OpDPdxFine struct {
-	IdResultType Id
-	IdResult     Id
-	P            Id
+	ResultType Id
+	ResultId   Id
+	P          Id
 }
 
 func (op *OpDPdxFine) Opcode() uint32 { return opcodeDPdxFine }
@@ -2058,9 +2058,9 @@ func (op *OpDPdxFine) Optional() bool { return false }
 func (op *OpDPdxFine) Verify() error  { return nil }
 
 type OpDPdyFine struct {
-	IdResultType Id
-	IdResult     Id
-	P            Id
+	ResultType Id
+	ResultId   Id
+	P          Id
 }
 
 func (op *OpDPdyFine) Opcode() uint32 { return opcodeDPdyFine }
@@ -2068,9 +2068,9 @@ func (op *OpDPdyFine) Optional() bool { return false }
 func (op *OpDPdyFine) Verify() error  { return nil }
 
 type OpFwidthFine struct {
-	IdResultType Id
-	IdResult     Id
-	P            Id
+	ResultType Id
+	ResultId   Id
+	P          Id
 }
 
 func (op *OpFwidthFine) Opcode() uint32 { return opcodeFwidthFine }
@@ -2078,9 +2078,9 @@ func (op *OpFwidthFine) Optional() bool { return false }
 func (op *OpFwidthFine) Verify() error  { return nil }
 
 type OpDPdxCoarse struct {
-	IdResultType Id
-	IdResult     Id
-	P            Id
+	ResultType Id
+	ResultId   Id
+	P          Id
 }
 
 func (op *OpDPdxCoarse) Opcode() uint32 { return opcodeDPdxCoarse }
@@ -2088,9 +2088,9 @@ func (op *OpDPdxCoarse) Optional() bool { return false }
 func (op *OpDPdxCoarse) Verify() error  { return nil }
 
 type OpDPdyCoarse struct {
-	IdResultType Id
-	IdResult     Id
-	P            Id
+	ResultType Id
+	ResultId   Id
+	P          Id
 }
 
 func (op *OpDPdyCoarse) Opcode() uint32 { return opcodeDPdyCoarse }
@@ -2098,9 +2098,9 @@ func (op *OpDPdyCoarse) Optional() bool { return false }
 func (op *OpDPdyCoarse) Verify() error  { return nil }
 
 type OpFwidthCoarse struct {
-	IdResultType Id
-	IdResult     Id
-	P            Id
+	ResultType Id
+	ResultId   Id
+	P          Id
 }
 
 func (op *OpFwidthCoarse) Opcode() uint32 { return opcodeFwidthCoarse }
@@ -2157,11 +2157,11 @@ func (op *OpMemoryBarrier) Optional() bool { return false }
 func (op *OpMemoryBarrier) Verify() error  { return nil }
 
 type OpAtomicLoad struct {
-	IdResultType Id
-	IdResult     Id
-	Pointer      Id
-	Memory       Id
-	Semantics    Id
+	ResultType Id
+	ResultId   Id
+	Pointer    Id
+	Memory     Id
+	Semantics  Id
 }
 
 func (op *OpAtomicLoad) Opcode() uint32 { return opcodeAtomicLoad }
@@ -2180,12 +2180,12 @@ func (op *OpAtomicStore) Optional() bool { return false }
 func (op *OpAtomicStore) Verify() error  { return nil }
 
 type OpAtomicExchange struct {
-	IdResultType Id
-	IdResult     Id
-	Pointer      Id
-	Memory       Id
-	Semantics    Id
-	Value        Id
+	ResultType Id
+	ResultId   Id
+	Pointer    Id
+	Memory     Id
+	Semantics  Id
+	Value      Id
 }
 
 func (op *OpAtomicExchange) Opcode() uint32 { return opcodeAtomicExchange }
@@ -2193,14 +2193,14 @@ func (op *OpAtomicExchange) Optional() bool { return false }
 func (op *OpAtomicExchange) Verify() error  { return nil }
 
 type OpAtomicCompareExchange struct {
-	IdResultType Id
-	IdResult     Id
-	Pointer      Id
-	Memory       Id
-	Equal        Id
-	Unequal      Id
-	Value        Id
-	Comparator   Id
+	ResultType Id
+	ResultId   Id
+	Pointer    Id
+	Memory     Id
+	Equal      Id
+	Unequal    Id
+	Value      Id
+	Comparator Id
 }
 
 func (op *OpAtomicCompareExchange) Opcode() uint32 { return opcodeAtomicCompareExchange }
@@ -2208,14 +2208,14 @@ func (op *OpAtomicCompareExchange) Optional() bool { return false }
 func (op *OpAtomicCompareExchange) Verify() error  { return nil }
 
 type OpAtomicCompareExchangeWeak struct {
-	IdResultType Id
-	IdResult     Id
-	Pointer      Id
-	Memory       Id
-	Equal        Id
-	Unequal      Id
-	Value        Id
-	Comparator   Id
+	ResultType Id
+	ResultId   Id
+	Pointer    Id
+	Memory     Id
+	Equal      Id
+	Unequal    Id
+	Value      Id
+	Comparator Id
 }
 
 func (op *OpAtomicCompareExchangeWeak) Opcode() uint32 { return opcodeAtomicCompareExchangeWeak }
@@ -2223,11 +2223,11 @@ func (op *OpAtomicCompareExchangeWeak) Optional() bool { return false }
 func (op *OpAtomicCompareExchangeWeak) Verify() error  { return nil }
 
 type OpAtomicIIncrement struct {
-	IdResultType Id
-	IdResult     Id
-	Pointer      Id
-	Memory       Id
-	Semantics    Id
+	ResultType Id
+	ResultId   Id
+	Pointer    Id
+	Memory     Id
+	Semantics  Id
 }
 
 func (op *OpAtomicIIncrement) Opcode() uint32 { return opcodeAtomicIIncrement }
@@ -2235,11 +2235,11 @@ func (op *OpAtomicIIncrement) Optional() bool { return false }
 func (op *OpAtomicIIncrement) Verify() error  { return nil }
 
 type OpAtomicIDecrement struct {
-	IdResultType Id
-	IdResult     Id
-	Pointer      Id
-	Memory       Id
-	Semantics    Id
+	ResultType Id
+	ResultId   Id
+	Pointer    Id
+	Memory     Id
+	Semantics  Id
 }
 
 func (op *OpAtomicIDecrement) Opcode() uint32 { return opcodeAtomicIDecrement }
@@ -2247,12 +2247,12 @@ func (op *OpAtomicIDecrement) Optional() bool { return false }
 func (op *OpAtomicIDecrement) Verify() error  { return nil }
 
 type OpAtomicIAdd struct {
-	IdResultType Id
-	IdResult     Id
-	Pointer      Id
-	Memory       Id
-	Semantics    Id
-	Value        Id
+	ResultType Id
+	ResultId   Id
+	Pointer    Id
+	Memory     Id
+	Semantics  Id
+	Value      Id
 }
 
 func (op *OpAtomicIAdd) Opcode() uint32 { return opcodeAtomicIAdd }
@@ -2260,12 +2260,12 @@ func (op *OpAtomicIAdd) Optional() bool { return false }
 func (op *OpAtomicIAdd) Verify() error  { return nil }
 
 type OpAtomicISub struct {
-	IdResultType Id
-	IdResult     Id
-	Pointer      Id
-	Memory       Id
-	Semantics    Id
-	Value        Id
+	ResultType Id
+	ResultId   Id
+	Pointer    Id
+	Memory     Id
+	Semantics  Id
+	Value      Id
 }
 
 func (op *OpAtomicISub) Opcode() uint32 { return opcodeAtomicISub }
@@ -2273,12 +2273,12 @@ func (op *OpAtomicISub) Optional() bool { return false }
 func (op *OpAtomicISub) Verify() error  { return nil }
 
 type OpAtomicSMin struct {
-	IdResultType Id
-	IdResult     Id
-	Pointer      Id
-	Memory       Id
-	Semantics    Id
-	Value        Id
+	ResultType Id
+	ResultId   Id
+	Pointer    Id
+	Memory     Id
+	Semantics  Id
+	Value      Id
 }
 
 func (op *OpAtomicSMin) Opcode() uint32 { return opcodeAtomicSMin }
@@ -2286,12 +2286,12 @@ func (op *OpAtomicSMin) Optional() bool { return false }
 func (op *OpAtomicSMin) Verify() error  { return nil }
 
 type OpAtomicUMin struct {
-	IdResultType Id
-	IdResult     Id
-	Pointer      Id
-	Memory       Id
-	Semantics    Id
-	Value        Id
+	ResultType Id
+	ResultId   Id
+	Pointer    Id
+	Memory     Id
+	Semantics  Id
+	Value      Id
 }
 
 func (op *OpAtomicUMin) Opcode() uint32 { return opcodeAtomicUMin }
@@ -2299,12 +2299,12 @@ func (op *OpAtomicUMin) Optional() bool { return false }
 func (op *OpAtomicUMin) Verify() error  { return nil }
 
 type OpAtomicSMax struct {
-	IdResultType Id
-	IdResult     Id
-	Pointer      Id
-	Memory       Id
-	Semantics    Id
-	Value        Id
+	ResultType Id
+	ResultId   Id
+	Pointer    Id
+	Memory     Id
+	Semantics  Id
+	Value      Id
 }
 
 func (op *OpAtomicSMax) Opcode() uint32 { return opcodeAtomicSMax }
@@ -2312,12 +2312,12 @@ func (op *OpAtomicSMax) Optional() bool { return false }
 func (op *OpAtomicSMax) Verify() error  { return nil }
 
 type OpAtomicUMax struct {
-	IdResultType Id
-	IdResult     Id
-	Pointer      Id
-	Memory       Id
-	Semantics    Id
-	Value        Id
+	ResultType Id
+	ResultId   Id
+	Pointer    Id
+	Memory     Id
+	Semantics  Id
+	Value      Id
 }
 
 func (op *OpAtomicUMax) Opcode() uint32 { return opcodeAtomicUMax }
@@ -2325,12 +2325,12 @@ func (op *OpAtomicUMax) Optional() bool { return false }
 func (op *OpAtomicUMax) Verify() error  { return nil }
 
 type OpAtomicAnd struct {
-	IdResultType Id
-	IdResult     Id
-	Pointer      Id
-	Memory       Id
-	Semantics    Id
-	Value        Id
+	ResultType Id
+	ResultId   Id
+	Pointer    Id
+	Memory     Id
+	Semantics  Id
+	Value      Id
 }
 
 func (op *OpAtomicAnd) Opcode() uint32 { return opcodeAtomicAnd }
@@ -2338,12 +2338,12 @@ func (op *OpAtomicAnd) Optional() bool { return false }
 func (op *OpAtomicAnd) Verify() error  { return nil }
 
 type OpAtomicOr struct {
-	IdResultType Id
-	IdResult     Id
-	Pointer      Id
-	Memory       Id
-	Semantics    Id
-	Value        Id
+	ResultType Id
+	ResultId   Id
+	Pointer    Id
+	Memory     Id
+	Semantics  Id
+	Value      Id
 }
 
 func (op *OpAtomicOr) Opcode() uint32 { return opcodeAtomicOr }
@@ -2351,12 +2351,12 @@ func (op *OpAtomicOr) Optional() bool { return false }
 func (op *OpAtomicOr) Verify() error  { return nil }
 
 type OpAtomicXor struct {
-	IdResultType Id
-	IdResult     Id
-	Pointer      Id
-	Memory       Id
-	Semantics    Id
-	Value        Id
+	ResultType Id
+	ResultId   Id
+	Pointer    Id
+	Memory     Id
+	Semantics  Id
+	Value      Id
 }
 
 func (op *OpAtomicXor) Opcode() uint32 { return opcodeAtomicXor }
@@ -2364,9 +2364,9 @@ func (op *OpAtomicXor) Optional() bool { return false }
 func (op *OpAtomicXor) Verify() error  { return nil }
 
 type OpPhi struct {
-	IdResultType Id
-	IdResult     Id
-	Argv         []PairIdRefIdRef `spirv:"optional"`
+	ResultType Id
+	ResultId   Id
+	Argv       []PairIdRefIdRef `spirv:"optional"`
 }
 
 func (op *OpPhi) Opcode() uint32 { return opcodePhi }
@@ -2394,7 +2394,7 @@ func (op *OpSelectionMerge) Optional() bool { return false }
 func (op *OpSelectionMerge) Verify() error  { return nil }
 
 type OpLabel struct {
-	IdResult Id
+	ResultId Id
 }
 
 func (op *OpLabel) Opcode() uint32 { return opcodeLabel }
@@ -2478,14 +2478,14 @@ func (op *OpLifetimeStop) Optional() bool { return false }
 func (op *OpLifetimeStop) Verify() error  { return nil }
 
 type OpGroupAsyncCopy struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Destination  Id
-	Source       Id
-	NumElements  Id
-	Stride       Id
-	Event        Id
+	ResultType  Id
+	ResultId    Id
+	Execution   Id
+	Destination Id
+	Source      Id
+	NumElements Id
+	Stride      Id
+	Event       Id
 }
 
 func (op *OpGroupAsyncCopy) Opcode() uint32 { return opcodeGroupAsyncCopy }
@@ -2503,10 +2503,10 @@ func (op *OpGroupWaitEvents) Optional() bool { return false }
 func (op *OpGroupWaitEvents) Verify() error  { return nil }
 
 type OpGroupAll struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Predicate    Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Predicate  Id
 }
 
 func (op *OpGroupAll) Opcode() uint32 { return opcodeGroupAll }
@@ -2514,10 +2514,10 @@ func (op *OpGroupAll) Optional() bool { return false }
 func (op *OpGroupAll) Verify() error  { return nil }
 
 type OpGroupAny struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Predicate    Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Predicate  Id
 }
 
 func (op *OpGroupAny) Opcode() uint32 { return opcodeGroupAny }
@@ -2525,11 +2525,11 @@ func (op *OpGroupAny) Optional() bool { return false }
 func (op *OpGroupAny) Verify() error  { return nil }
 
 type OpGroupBroadcast struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Value        Id
-	LocalId      Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Value      Id
+	LocalId    Id
 }
 
 func (op *OpGroupBroadcast) Opcode() uint32 { return opcodeGroupBroadcast }
@@ -2537,11 +2537,11 @@ func (op *OpGroupBroadcast) Optional() bool { return false }
 func (op *OpGroupBroadcast) Verify() error  { return nil }
 
 type OpGroupIAdd struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	X            Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Operation  GroupOperation
+	X          Id
 }
 
 func (op *OpGroupIAdd) Opcode() uint32 { return opcodeGroupIAdd }
@@ -2549,11 +2549,11 @@ func (op *OpGroupIAdd) Optional() bool { return false }
 func (op *OpGroupIAdd) Verify() error  { return nil }
 
 type OpGroupFAdd struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	X            Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Operation  GroupOperation
+	X          Id
 }
 
 func (op *OpGroupFAdd) Opcode() uint32 { return opcodeGroupFAdd }
@@ -2561,11 +2561,11 @@ func (op *OpGroupFAdd) Optional() bool { return false }
 func (op *OpGroupFAdd) Verify() error  { return nil }
 
 type OpGroupFMin struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	X            Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Operation  GroupOperation
+	X          Id
 }
 
 func (op *OpGroupFMin) Opcode() uint32 { return opcodeGroupFMin }
@@ -2573,11 +2573,11 @@ func (op *OpGroupFMin) Optional() bool { return false }
 func (op *OpGroupFMin) Verify() error  { return nil }
 
 type OpGroupUMin struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	X            Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Operation  GroupOperation
+	X          Id
 }
 
 func (op *OpGroupUMin) Opcode() uint32 { return opcodeGroupUMin }
@@ -2585,11 +2585,11 @@ func (op *OpGroupUMin) Optional() bool { return false }
 func (op *OpGroupUMin) Verify() error  { return nil }
 
 type OpGroupSMin struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	X            Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Operation  GroupOperation
+	X          Id
 }
 
 func (op *OpGroupSMin) Opcode() uint32 { return opcodeGroupSMin }
@@ -2597,11 +2597,11 @@ func (op *OpGroupSMin) Optional() bool { return false }
 func (op *OpGroupSMin) Verify() error  { return nil }
 
 type OpGroupFMax struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	X            Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Operation  GroupOperation
+	X          Id
 }
 
 func (op *OpGroupFMax) Opcode() uint32 { return opcodeGroupFMax }
@@ -2609,11 +2609,11 @@ func (op *OpGroupFMax) Optional() bool { return false }
 func (op *OpGroupFMax) Verify() error  { return nil }
 
 type OpGroupUMax struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	X            Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Operation  GroupOperation
+	X          Id
 }
 
 func (op *OpGroupUMax) Opcode() uint32 { return opcodeGroupUMax }
@@ -2621,11 +2621,11 @@ func (op *OpGroupUMax) Optional() bool { return false }
 func (op *OpGroupUMax) Verify() error  { return nil }
 
 type OpGroupSMax struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	X            Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Operation  GroupOperation
+	X          Id
 }
 
 func (op *OpGroupSMax) Opcode() uint32 { return opcodeGroupSMax }
@@ -2633,8 +2633,8 @@ func (op *OpGroupSMax) Optional() bool { return false }
 func (op *OpGroupSMax) Verify() error  { return nil }
 
 type OpReadPipe struct {
-	IdResultType    Id
-	IdResult        Id
+	ResultType      Id
+	ResultId        Id
 	Pipe            Id
 	Pointer         Id
 	PacketSize      Id
@@ -2646,8 +2646,8 @@ func (op *OpReadPipe) Optional() bool { return false }
 func (op *OpReadPipe) Verify() error  { return nil }
 
 type OpWritePipe struct {
-	IdResultType    Id
-	IdResult        Id
+	ResultType      Id
+	ResultId        Id
 	Pipe            Id
 	Pointer         Id
 	PacketSize      Id
@@ -2659,8 +2659,8 @@ func (op *OpWritePipe) Optional() bool { return false }
 func (op *OpWritePipe) Verify() error  { return nil }
 
 type OpReservedReadPipe struct {
-	IdResultType    Id
-	IdResult        Id
+	ResultType      Id
+	ResultId        Id
 	Pipe            Id
 	ReserveId       Id
 	Index           Id
@@ -2674,8 +2674,8 @@ func (op *OpReservedReadPipe) Optional() bool { return false }
 func (op *OpReservedReadPipe) Verify() error  { return nil }
 
 type OpReservedWritePipe struct {
-	IdResultType    Id
-	IdResult        Id
+	ResultType      Id
+	ResultId        Id
 	Pipe            Id
 	ReserveId       Id
 	Index           Id
@@ -2689,8 +2689,8 @@ func (op *OpReservedWritePipe) Optional() bool { return false }
 func (op *OpReservedWritePipe) Verify() error  { return nil }
 
 type OpReserveReadPipePackets struct {
-	IdResultType    Id
-	IdResult        Id
+	ResultType      Id
+	ResultId        Id
 	Pipe            Id
 	NumPackets      Id
 	PacketSize      Id
@@ -2702,8 +2702,8 @@ func (op *OpReserveReadPipePackets) Optional() bool { return false }
 func (op *OpReserveReadPipePackets) Verify() error  { return nil }
 
 type OpReserveWritePipePackets struct {
-	IdResultType    Id
-	IdResult        Id
+	ResultType      Id
+	ResultId        Id
 	Pipe            Id
 	NumPackets      Id
 	PacketSize      Id
@@ -2737,9 +2737,9 @@ func (op *OpCommitWritePipe) Optional() bool { return false }
 func (op *OpCommitWritePipe) Verify() error  { return nil }
 
 type OpIsValidReserveId struct {
-	IdResultType Id
-	IdResult     Id
-	ReserveId    Id
+	ResultType Id
+	ResultId   Id
+	ReserveId  Id
 }
 
 func (op *OpIsValidReserveId) Opcode() uint32 { return opcodeIsValidReserveId }
@@ -2747,8 +2747,8 @@ func (op *OpIsValidReserveId) Optional() bool { return false }
 func (op *OpIsValidReserveId) Verify() error  { return nil }
 
 type OpGetNumPipePackets struct {
-	IdResultType    Id
-	IdResult        Id
+	ResultType      Id
+	ResultId        Id
 	Pipe            Id
 	PacketSize      Id
 	PacketAlignment Id
@@ -2759,8 +2759,8 @@ func (op *OpGetNumPipePackets) Optional() bool { return false }
 func (op *OpGetNumPipePackets) Verify() error  { return nil }
 
 type OpGetMaxPipePackets struct {
-	IdResultType    Id
-	IdResult        Id
+	ResultType      Id
+	ResultId        Id
 	Pipe            Id
 	PacketSize      Id
 	PacketAlignment Id
@@ -2771,8 +2771,8 @@ func (op *OpGetMaxPipePackets) Optional() bool { return false }
 func (op *OpGetMaxPipePackets) Verify() error  { return nil }
 
 type OpGroupReserveReadPipePackets struct {
-	IdResultType    Id
-	IdResult        Id
+	ResultType      Id
+	ResultId        Id
 	Execution       Id
 	Pipe            Id
 	NumPackets      Id
@@ -2785,8 +2785,8 @@ func (op *OpGroupReserveReadPipePackets) Optional() bool { return false }
 func (op *OpGroupReserveReadPipePackets) Verify() error  { return nil }
 
 type OpGroupReserveWritePipePackets struct {
-	IdResultType    Id
-	IdResult        Id
+	ResultType      Id
+	ResultId        Id
 	Execution       Id
 	Pipe            Id
 	NumPackets      Id
@@ -2823,12 +2823,12 @@ func (op *OpGroupCommitWritePipe) Optional() bool { return false }
 func (op *OpGroupCommitWritePipe) Verify() error  { return nil }
 
 type OpEnqueueMarker struct {
-	IdResultType Id
-	IdResult     Id
-	Queue        Id
-	NumEvents    Id
-	WaitEvents   Id
-	RetEvent     Id
+	ResultType Id
+	ResultId   Id
+	Queue      Id
+	NumEvents  Id
+	WaitEvents Id
+	RetEvent   Id
 }
 
 func (op *OpEnqueueMarker) Opcode() uint32 { return opcodeEnqueueMarker }
@@ -2836,19 +2836,19 @@ func (op *OpEnqueueMarker) Optional() bool { return false }
 func (op *OpEnqueueMarker) Verify() error  { return nil }
 
 type OpEnqueueKernel struct {
-	IdResultType Id
-	IdResult     Id
-	Queue        Id
-	Flags        Id
-	NDRange      Id
-	NumEvents    Id
-	WaitEvents   Id
-	RetEvent     Id
-	Invoke       Id
-	Param        Id
-	ParamSize    Id
-	ParamAlign   Id
-	LocalSize    []Id `spirv:"optional"`
+	ResultType Id
+	ResultId   Id
+	Queue      Id
+	Flags      Id
+	NDRange    Id
+	NumEvents  Id
+	WaitEvents Id
+	RetEvent   Id
+	Invoke     Id
+	Param      Id
+	ParamSize  Id
+	ParamAlign Id
+	LocalSize  []Id `spirv:"optional"`
 }
 
 func (op *OpEnqueueKernel) Opcode() uint32 { return opcodeEnqueueKernel }
@@ -2856,13 +2856,13 @@ func (op *OpEnqueueKernel) Optional() bool { return false }
 func (op *OpEnqueueKernel) Verify() error  { return nil }
 
 type OpGetKernelNDrangeSubGroupCount struct {
-	IdResultType Id
-	IdResult     Id
-	NDRange      Id
-	Invoke       Id
-	Param        Id
-	ParamSize    Id
-	ParamAlign   Id
+	ResultType Id
+	ResultId   Id
+	NDRange    Id
+	Invoke     Id
+	Param      Id
+	ParamSize  Id
+	ParamAlign Id
 }
 
 func (op *OpGetKernelNDrangeSubGroupCount) Opcode() uint32 { return opcodeGetKernelNDrangeSubGroupCount }
@@ -2870,13 +2870,13 @@ func (op *OpGetKernelNDrangeSubGroupCount) Optional() bool { return false }
 func (op *OpGetKernelNDrangeSubGroupCount) Verify() error  { return nil }
 
 type OpGetKernelNDrangeMaxSubGroupSize struct {
-	IdResultType Id
-	IdResult     Id
-	NDRange      Id
-	Invoke       Id
-	Param        Id
-	ParamSize    Id
-	ParamAlign   Id
+	ResultType Id
+	ResultId   Id
+	NDRange    Id
+	Invoke     Id
+	Param      Id
+	ParamSize  Id
+	ParamAlign Id
 }
 
 func (op *OpGetKernelNDrangeMaxSubGroupSize) Opcode() uint32 {
@@ -2886,12 +2886,12 @@ func (op *OpGetKernelNDrangeMaxSubGroupSize) Optional() bool { return false }
 func (op *OpGetKernelNDrangeMaxSubGroupSize) Verify() error  { return nil }
 
 type OpGetKernelWorkGroupSize struct {
-	IdResultType Id
-	IdResult     Id
-	Invoke       Id
-	Param        Id
-	ParamSize    Id
-	ParamAlign   Id
+	ResultType Id
+	ResultId   Id
+	Invoke     Id
+	Param      Id
+	ParamSize  Id
+	ParamAlign Id
 }
 
 func (op *OpGetKernelWorkGroupSize) Opcode() uint32 { return opcodeGetKernelWorkGroupSize }
@@ -2899,12 +2899,12 @@ func (op *OpGetKernelWorkGroupSize) Optional() bool { return false }
 func (op *OpGetKernelWorkGroupSize) Verify() error  { return nil }
 
 type OpGetKernelPreferredWorkGroupSizeMultiple struct {
-	IdResultType Id
-	IdResult     Id
-	Invoke       Id
-	Param        Id
-	ParamSize    Id
-	ParamAlign   Id
+	ResultType Id
+	ResultId   Id
+	Invoke     Id
+	Param      Id
+	ParamSize  Id
+	ParamAlign Id
 }
 
 func (op *OpGetKernelPreferredWorkGroupSizeMultiple) Opcode() uint32 {
@@ -2930,8 +2930,8 @@ func (op *OpReleaseEvent) Optional() bool { return false }
 func (op *OpReleaseEvent) Verify() error  { return nil }
 
 type OpCreateUserEvent struct {
-	IdResultType Id
-	IdResult     Id
+	ResultType Id
+	ResultId   Id
 }
 
 func (op *OpCreateUserEvent) Opcode() uint32 { return opcodeCreateUserEvent }
@@ -2939,9 +2939,9 @@ func (op *OpCreateUserEvent) Optional() bool { return false }
 func (op *OpCreateUserEvent) Verify() error  { return nil }
 
 type OpIsValidEvent struct {
-	IdResultType Id
-	IdResult     Id
-	Event        Id
+	ResultType Id
+	ResultId   Id
+	Event      Id
 }
 
 func (op *OpIsValidEvent) Opcode() uint32 { return opcodeIsValidEvent }
@@ -2968,8 +2968,8 @@ func (op *OpCaptureEventProfilingInfo) Optional() bool { return false }
 func (op *OpCaptureEventProfilingInfo) Verify() error  { return nil }
 
 type OpGetDefaultQueue struct {
-	IdResultType Id
-	IdResult     Id
+	ResultType Id
+	ResultId   Id
 }
 
 func (op *OpGetDefaultQueue) Opcode() uint32 { return opcodeGetDefaultQueue }
@@ -2977,8 +2977,8 @@ func (op *OpGetDefaultQueue) Optional() bool { return false }
 func (op *OpGetDefaultQueue) Verify() error  { return nil }
 
 type OpBuildNDRange struct {
-	IdResultType     Id
-	IdResult         Id
+	ResultType       Id
+	ResultId         Id
 	GlobalWorkSize   Id
 	LocalWorkSize    Id
 	GlobalWorkOffset Id
@@ -2989,8 +2989,8 @@ func (op *OpBuildNDRange) Optional() bool { return false }
 func (op *OpBuildNDRange) Verify() error  { return nil }
 
 type OpImageSparseSampleImplicitLod struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	SampledImage  Id
 	Coordinate    Id
 	ImageOperands ImageOperands `spirv:"optional"`
@@ -3001,8 +3001,8 @@ func (op *OpImageSparseSampleImplicitLod) Optional() bool { return false }
 func (op *OpImageSparseSampleImplicitLod) Verify() error  { return nil }
 
 type OpImageSparseSampleExplicitLod struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	SampledImage  Id
 	Coordinate    Id
 	ImageOperands ImageOperands
@@ -3013,8 +3013,8 @@ func (op *OpImageSparseSampleExplicitLod) Optional() bool { return false }
 func (op *OpImageSparseSampleExplicitLod) Verify() error  { return nil }
 
 type OpImageSparseSampleDrefImplicitLod struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	SampledImage  Id
 	Coordinate    Id
 	D_ref_        Id
@@ -3028,8 +3028,8 @@ func (op *OpImageSparseSampleDrefImplicitLod) Optional() bool { return false }
 func (op *OpImageSparseSampleDrefImplicitLod) Verify() error  { return nil }
 
 type OpImageSparseSampleDrefExplicitLod struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	SampledImage  Id
 	Coordinate    Id
 	D_ref_        Id
@@ -3043,8 +3043,8 @@ func (op *OpImageSparseSampleDrefExplicitLod) Optional() bool { return false }
 func (op *OpImageSparseSampleDrefExplicitLod) Verify() error  { return nil }
 
 type OpImageSparseSampleProjImplicitLod struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	SampledImage  Id
 	Coordinate    Id
 	ImageOperands ImageOperands `spirv:"optional"`
@@ -3057,8 +3057,8 @@ func (op *OpImageSparseSampleProjImplicitLod) Optional() bool { return false }
 func (op *OpImageSparseSampleProjImplicitLod) Verify() error  { return nil }
 
 type OpImageSparseSampleProjExplicitLod struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	SampledImage  Id
 	Coordinate    Id
 	ImageOperands ImageOperands
@@ -3071,8 +3071,8 @@ func (op *OpImageSparseSampleProjExplicitLod) Optional() bool { return false }
 func (op *OpImageSparseSampleProjExplicitLod) Verify() error  { return nil }
 
 type OpImageSparseSampleProjDrefImplicitLod struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	SampledImage  Id
 	Coordinate    Id
 	D_ref_        Id
@@ -3086,8 +3086,8 @@ func (op *OpImageSparseSampleProjDrefImplicitLod) Optional() bool { return false
 func (op *OpImageSparseSampleProjDrefImplicitLod) Verify() error  { return nil }
 
 type OpImageSparseSampleProjDrefExplicitLod struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	SampledImage  Id
 	Coordinate    Id
 	D_ref_        Id
@@ -3101,8 +3101,8 @@ func (op *OpImageSparseSampleProjDrefExplicitLod) Optional() bool { return false
 func (op *OpImageSparseSampleProjDrefExplicitLod) Verify() error  { return nil }
 
 type OpImageSparseFetch struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	Image         Id
 	Coordinate    Id
 	ImageOperands ImageOperands `spirv:"optional"`
@@ -3113,8 +3113,8 @@ func (op *OpImageSparseFetch) Optional() bool { return false }
 func (op *OpImageSparseFetch) Verify() error  { return nil }
 
 type OpImageSparseGather struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	SampledImage  Id
 	Coordinate    Id
 	Component     Id
@@ -3126,8 +3126,8 @@ func (op *OpImageSparseGather) Optional() bool { return false }
 func (op *OpImageSparseGather) Verify() error  { return nil }
 
 type OpImageSparseDrefGather struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	SampledImage  Id
 	Coordinate    Id
 	D_ref_        Id
@@ -3139,8 +3139,8 @@ func (op *OpImageSparseDrefGather) Optional() bool { return false }
 func (op *OpImageSparseDrefGather) Verify() error  { return nil }
 
 type OpImageSparseTexelsResident struct {
-	IdResultType Id
-	IdResult     Id
+	ResultType   Id
+	ResultId     Id
 	ResidentCode Id
 }
 
@@ -3156,11 +3156,11 @@ func (op *OpNoLine) Optional() bool { return true }
 func (op *OpNoLine) Verify() error  { return nil }
 
 type OpAtomicFlagTestAndSet struct {
-	IdResultType Id
-	IdResult     Id
-	Pointer      Id
-	Memory       Id
-	Semantics    Id
+	ResultType Id
+	ResultId   Id
+	Pointer    Id
+	Memory     Id
+	Semantics  Id
 }
 
 func (op *OpAtomicFlagTestAndSet) Opcode() uint32 { return opcodeAtomicFlagTestAndSet }
@@ -3178,8 +3178,8 @@ func (op *OpAtomicFlagClear) Optional() bool { return false }
 func (op *OpAtomicFlagClear) Verify() error  { return nil }
 
 type OpImageSparseRead struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	Image         Id
 	Coordinate    Id
 	ImageOperands ImageOperands `spirv:"optional"`
@@ -3190,9 +3190,9 @@ func (op *OpImageSparseRead) Optional() bool { return false }
 func (op *OpImageSparseRead) Verify() error  { return nil }
 
 type OpSizeOf struct {
-	IdResultType Id
-	IdResult     Id
-	Pointer      Id
+	ResultType Id
+	ResultId   Id
+	Pointer    Id
 }
 
 func (op *OpSizeOf) Opcode() uint32 { return opcodeSizeOf }
@@ -3200,7 +3200,7 @@ func (op *OpSizeOf) Optional() bool { return false }
 func (op *OpSizeOf) Verify() error  { return nil }
 
 type OpTypePipeStorage struct {
-	IdResult Id
+	ResultId Id
 }
 
 func (op *OpTypePipeStorage) Opcode() uint32 { return opcodeTypePipeStorage }
@@ -3208,8 +3208,8 @@ func (op *OpTypePipeStorage) Optional() bool { return false }
 func (op *OpTypePipeStorage) Verify() error  { return nil }
 
 type OpConstantPipeStorage struct {
-	IdResultType    Id
-	IdResult        Id
+	ResultType      Id
+	ResultId        Id
 	PacketSize      uint32
 	PacketAlignment uint32
 	Capacity        uint32
@@ -3220,9 +3220,9 @@ func (op *OpConstantPipeStorage) Optional() bool { return false }
 func (op *OpConstantPipeStorage) Verify() error  { return nil }
 
 type OpCreatePipeFromPipeStorage struct {
-	IdResultType Id
-	IdResult     Id
-	PipeStorage  Id
+	ResultType  Id
+	ResultId    Id
+	PipeStorage Id
 }
 
 func (op *OpCreatePipeFromPipeStorage) Opcode() uint32 { return opcodeCreatePipeFromPipeStorage }
@@ -3230,8 +3230,8 @@ func (op *OpCreatePipeFromPipeStorage) Optional() bool { return false }
 func (op *OpCreatePipeFromPipeStorage) Verify() error  { return nil }
 
 type OpGetKernelLocalSizeForSubgroupCount struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	SubgroupCount Id
 	Invoke        Id
 	Param         Id
@@ -3246,12 +3246,12 @@ func (op *OpGetKernelLocalSizeForSubgroupCount) Optional() bool { return false }
 func (op *OpGetKernelLocalSizeForSubgroupCount) Verify() error  { return nil }
 
 type OpGetKernelMaxNumSubgroups struct {
-	IdResultType Id
-	IdResult     Id
-	Invoke       Id
-	Param        Id
-	ParamSize    Id
-	ParamAlign   Id
+	ResultType Id
+	ResultId   Id
+	Invoke     Id
+	Param      Id
+	ParamSize  Id
+	ParamAlign Id
 }
 
 func (op *OpGetKernelMaxNumSubgroups) Opcode() uint32 { return opcodeGetKernelMaxNumSubgroups }
@@ -3259,7 +3259,7 @@ func (op *OpGetKernelMaxNumSubgroups) Optional() bool { return false }
 func (op *OpGetKernelMaxNumSubgroups) Verify() error  { return nil }
 
 type OpTypeNamedBarrier struct {
-	IdResult Id
+	ResultId Id
 }
 
 func (op *OpTypeNamedBarrier) Opcode() uint32 { return opcodeTypeNamedBarrier }
@@ -3267,8 +3267,8 @@ func (op *OpTypeNamedBarrier) Optional() bool { return false }
 func (op *OpTypeNamedBarrier) Verify() error  { return nil }
 
 type OpNamedBarrierInitialize struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	SubgroupCount Id
 }
 
@@ -3313,9 +3313,9 @@ func (op *OpDecorateId) Optional() bool { return false }
 func (op *OpDecorateId) Verify() error  { return nil }
 
 type OpGroupNonUniformElect struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
 }
 
 func (op *OpGroupNonUniformElect) Opcode() uint32 { return opcodeGroupNonUniformElect }
@@ -3323,10 +3323,10 @@ func (op *OpGroupNonUniformElect) Optional() bool { return false }
 func (op *OpGroupNonUniformElect) Verify() error  { return nil }
 
 type OpGroupNonUniformAll struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Predicate    Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Predicate  Id
 }
 
 func (op *OpGroupNonUniformAll) Opcode() uint32 { return opcodeGroupNonUniformAll }
@@ -3334,10 +3334,10 @@ func (op *OpGroupNonUniformAll) Optional() bool { return false }
 func (op *OpGroupNonUniformAll) Verify() error  { return nil }
 
 type OpGroupNonUniformAny struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Predicate    Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Predicate  Id
 }
 
 func (op *OpGroupNonUniformAny) Opcode() uint32 { return opcodeGroupNonUniformAny }
@@ -3345,10 +3345,10 @@ func (op *OpGroupNonUniformAny) Optional() bool { return false }
 func (op *OpGroupNonUniformAny) Verify() error  { return nil }
 
 type OpGroupNonUniformAllEqual struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Value        Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Value      Id
 }
 
 func (op *OpGroupNonUniformAllEqual) Opcode() uint32 { return opcodeGroupNonUniformAllEqual }
@@ -3356,11 +3356,11 @@ func (op *OpGroupNonUniformAllEqual) Optional() bool { return false }
 func (op *OpGroupNonUniformAllEqual) Verify() error  { return nil }
 
 type OpGroupNonUniformBroadcast struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Value        Id
-	Id           Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Value      Id
+	Id         Id
 }
 
 func (op *OpGroupNonUniformBroadcast) Opcode() uint32 { return opcodeGroupNonUniformBroadcast }
@@ -3368,10 +3368,10 @@ func (op *OpGroupNonUniformBroadcast) Optional() bool { return false }
 func (op *OpGroupNonUniformBroadcast) Verify() error  { return nil }
 
 type OpGroupNonUniformBroadcastFirst struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Value        Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Value      Id
 }
 
 func (op *OpGroupNonUniformBroadcastFirst) Opcode() uint32 { return opcodeGroupNonUniformBroadcastFirst }
@@ -3379,10 +3379,10 @@ func (op *OpGroupNonUniformBroadcastFirst) Optional() bool { return false }
 func (op *OpGroupNonUniformBroadcastFirst) Verify() error  { return nil }
 
 type OpGroupNonUniformBallot struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Predicate    Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Predicate  Id
 }
 
 func (op *OpGroupNonUniformBallot) Opcode() uint32 { return opcodeGroupNonUniformBallot }
@@ -3390,10 +3390,10 @@ func (op *OpGroupNonUniformBallot) Optional() bool { return false }
 func (op *OpGroupNonUniformBallot) Verify() error  { return nil }
 
 type OpGroupNonUniformInverseBallot struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Value        Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Value      Id
 }
 
 func (op *OpGroupNonUniformInverseBallot) Opcode() uint32 { return opcodeGroupNonUniformInverseBallot }
@@ -3401,11 +3401,11 @@ func (op *OpGroupNonUniformInverseBallot) Optional() bool { return false }
 func (op *OpGroupNonUniformInverseBallot) Verify() error  { return nil }
 
 type OpGroupNonUniformBallotBitExtract struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Value        Id
-	Index        Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Value      Id
+	Index      Id
 }
 
 func (op *OpGroupNonUniformBallotBitExtract) Opcode() uint32 {
@@ -3415,11 +3415,11 @@ func (op *OpGroupNonUniformBallotBitExtract) Optional() bool { return false }
 func (op *OpGroupNonUniformBallotBitExtract) Verify() error  { return nil }
 
 type OpGroupNonUniformBallotBitCount struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	Value        Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Operation  GroupOperation
+	Value      Id
 }
 
 func (op *OpGroupNonUniformBallotBitCount) Opcode() uint32 { return opcodeGroupNonUniformBallotBitCount }
@@ -3427,10 +3427,10 @@ func (op *OpGroupNonUniformBallotBitCount) Optional() bool { return false }
 func (op *OpGroupNonUniformBallotBitCount) Verify() error  { return nil }
 
 type OpGroupNonUniformBallotFindLSB struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Value        Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Value      Id
 }
 
 func (op *OpGroupNonUniformBallotFindLSB) Opcode() uint32 { return opcodeGroupNonUniformBallotFindLSB }
@@ -3438,10 +3438,10 @@ func (op *OpGroupNonUniformBallotFindLSB) Optional() bool { return false }
 func (op *OpGroupNonUniformBallotFindLSB) Verify() error  { return nil }
 
 type OpGroupNonUniformBallotFindMSB struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Value        Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Value      Id
 }
 
 func (op *OpGroupNonUniformBallotFindMSB) Opcode() uint32 { return opcodeGroupNonUniformBallotFindMSB }
@@ -3449,11 +3449,11 @@ func (op *OpGroupNonUniformBallotFindMSB) Optional() bool { return false }
 func (op *OpGroupNonUniformBallotFindMSB) Verify() error  { return nil }
 
 type OpGroupNonUniformShuffle struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Value        Id
-	Id           Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Value      Id
+	Id         Id
 }
 
 func (op *OpGroupNonUniformShuffle) Opcode() uint32 { return opcodeGroupNonUniformShuffle }
@@ -3461,11 +3461,11 @@ func (op *OpGroupNonUniformShuffle) Optional() bool { return false }
 func (op *OpGroupNonUniformShuffle) Verify() error  { return nil }
 
 type OpGroupNonUniformShuffleXor struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Value        Id
-	Mask         Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Value      Id
+	Mask       Id
 }
 
 func (op *OpGroupNonUniformShuffleXor) Opcode() uint32 { return opcodeGroupNonUniformShuffleXor }
@@ -3473,11 +3473,11 @@ func (op *OpGroupNonUniformShuffleXor) Optional() bool { return false }
 func (op *OpGroupNonUniformShuffleXor) Verify() error  { return nil }
 
 type OpGroupNonUniformShuffleUp struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Value        Id
-	Delta        Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Value      Id
+	Delta      Id
 }
 
 func (op *OpGroupNonUniformShuffleUp) Opcode() uint32 { return opcodeGroupNonUniformShuffleUp }
@@ -3485,11 +3485,11 @@ func (op *OpGroupNonUniformShuffleUp) Optional() bool { return false }
 func (op *OpGroupNonUniformShuffleUp) Verify() error  { return nil }
 
 type OpGroupNonUniformShuffleDown struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Value        Id
-	Delta        Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Value      Id
+	Delta      Id
 }
 
 func (op *OpGroupNonUniformShuffleDown) Opcode() uint32 { return opcodeGroupNonUniformShuffleDown }
@@ -3497,12 +3497,12 @@ func (op *OpGroupNonUniformShuffleDown) Optional() bool { return false }
 func (op *OpGroupNonUniformShuffleDown) Verify() error  { return nil }
 
 type OpGroupNonUniformIAdd struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	Value        Id
-	ClusterSize  Id `spirv:"optional"`
+	ResultType  Id
+	ResultId    Id
+	Execution   Id
+	Operation   GroupOperation
+	Value       Id
+	ClusterSize Id `spirv:"optional"`
 }
 
 func (op *OpGroupNonUniformIAdd) Opcode() uint32 { return opcodeGroupNonUniformIAdd }
@@ -3510,12 +3510,12 @@ func (op *OpGroupNonUniformIAdd) Optional() bool { return false }
 func (op *OpGroupNonUniformIAdd) Verify() error  { return nil }
 
 type OpGroupNonUniformFAdd struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	Value        Id
-	ClusterSize  Id `spirv:"optional"`
+	ResultType  Id
+	ResultId    Id
+	Execution   Id
+	Operation   GroupOperation
+	Value       Id
+	ClusterSize Id `spirv:"optional"`
 }
 
 func (op *OpGroupNonUniformFAdd) Opcode() uint32 { return opcodeGroupNonUniformFAdd }
@@ -3523,12 +3523,12 @@ func (op *OpGroupNonUniformFAdd) Optional() bool { return false }
 func (op *OpGroupNonUniformFAdd) Verify() error  { return nil }
 
 type OpGroupNonUniformIMul struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	Value        Id
-	ClusterSize  Id `spirv:"optional"`
+	ResultType  Id
+	ResultId    Id
+	Execution   Id
+	Operation   GroupOperation
+	Value       Id
+	ClusterSize Id `spirv:"optional"`
 }
 
 func (op *OpGroupNonUniformIMul) Opcode() uint32 { return opcodeGroupNonUniformIMul }
@@ -3536,12 +3536,12 @@ func (op *OpGroupNonUniformIMul) Optional() bool { return false }
 func (op *OpGroupNonUniformIMul) Verify() error  { return nil }
 
 type OpGroupNonUniformFMul struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	Value        Id
-	ClusterSize  Id `spirv:"optional"`
+	ResultType  Id
+	ResultId    Id
+	Execution   Id
+	Operation   GroupOperation
+	Value       Id
+	ClusterSize Id `spirv:"optional"`
 }
 
 func (op *OpGroupNonUniformFMul) Opcode() uint32 { return opcodeGroupNonUniformFMul }
@@ -3549,12 +3549,12 @@ func (op *OpGroupNonUniformFMul) Optional() bool { return false }
 func (op *OpGroupNonUniformFMul) Verify() error  { return nil }
 
 type OpGroupNonUniformSMin struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	Value        Id
-	ClusterSize  Id `spirv:"optional"`
+	ResultType  Id
+	ResultId    Id
+	Execution   Id
+	Operation   GroupOperation
+	Value       Id
+	ClusterSize Id `spirv:"optional"`
 }
 
 func (op *OpGroupNonUniformSMin) Opcode() uint32 { return opcodeGroupNonUniformSMin }
@@ -3562,12 +3562,12 @@ func (op *OpGroupNonUniformSMin) Optional() bool { return false }
 func (op *OpGroupNonUniformSMin) Verify() error  { return nil }
 
 type OpGroupNonUniformUMin struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	Value        Id
-	ClusterSize  Id `spirv:"optional"`
+	ResultType  Id
+	ResultId    Id
+	Execution   Id
+	Operation   GroupOperation
+	Value       Id
+	ClusterSize Id `spirv:"optional"`
 }
 
 func (op *OpGroupNonUniformUMin) Opcode() uint32 { return opcodeGroupNonUniformUMin }
@@ -3575,12 +3575,12 @@ func (op *OpGroupNonUniformUMin) Optional() bool { return false }
 func (op *OpGroupNonUniformUMin) Verify() error  { return nil }
 
 type OpGroupNonUniformFMin struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	Value        Id
-	ClusterSize  Id `spirv:"optional"`
+	ResultType  Id
+	ResultId    Id
+	Execution   Id
+	Operation   GroupOperation
+	Value       Id
+	ClusterSize Id `spirv:"optional"`
 }
 
 func (op *OpGroupNonUniformFMin) Opcode() uint32 { return opcodeGroupNonUniformFMin }
@@ -3588,12 +3588,12 @@ func (op *OpGroupNonUniformFMin) Optional() bool { return false }
 func (op *OpGroupNonUniformFMin) Verify() error  { return nil }
 
 type OpGroupNonUniformSMax struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	Value        Id
-	ClusterSize  Id `spirv:"optional"`
+	ResultType  Id
+	ResultId    Id
+	Execution   Id
+	Operation   GroupOperation
+	Value       Id
+	ClusterSize Id `spirv:"optional"`
 }
 
 func (op *OpGroupNonUniformSMax) Opcode() uint32 { return opcodeGroupNonUniformSMax }
@@ -3601,12 +3601,12 @@ func (op *OpGroupNonUniformSMax) Optional() bool { return false }
 func (op *OpGroupNonUniformSMax) Verify() error  { return nil }
 
 type OpGroupNonUniformUMax struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	Value        Id
-	ClusterSize  Id `spirv:"optional"`
+	ResultType  Id
+	ResultId    Id
+	Execution   Id
+	Operation   GroupOperation
+	Value       Id
+	ClusterSize Id `spirv:"optional"`
 }
 
 func (op *OpGroupNonUniformUMax) Opcode() uint32 { return opcodeGroupNonUniformUMax }
@@ -3614,12 +3614,12 @@ func (op *OpGroupNonUniformUMax) Optional() bool { return false }
 func (op *OpGroupNonUniformUMax) Verify() error  { return nil }
 
 type OpGroupNonUniformFMax struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	Value        Id
-	ClusterSize  Id `spirv:"optional"`
+	ResultType  Id
+	ResultId    Id
+	Execution   Id
+	Operation   GroupOperation
+	Value       Id
+	ClusterSize Id `spirv:"optional"`
 }
 
 func (op *OpGroupNonUniformFMax) Opcode() uint32 { return opcodeGroupNonUniformFMax }
@@ -3627,12 +3627,12 @@ func (op *OpGroupNonUniformFMax) Optional() bool { return false }
 func (op *OpGroupNonUniformFMax) Verify() error  { return nil }
 
 type OpGroupNonUniformBitwiseAnd struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	Value        Id
-	ClusterSize  Id `spirv:"optional"`
+	ResultType  Id
+	ResultId    Id
+	Execution   Id
+	Operation   GroupOperation
+	Value       Id
+	ClusterSize Id `spirv:"optional"`
 }
 
 func (op *OpGroupNonUniformBitwiseAnd) Opcode() uint32 { return opcodeGroupNonUniformBitwiseAnd }
@@ -3640,12 +3640,12 @@ func (op *OpGroupNonUniformBitwiseAnd) Optional() bool { return false }
 func (op *OpGroupNonUniformBitwiseAnd) Verify() error  { return nil }
 
 type OpGroupNonUniformBitwiseOr struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	Value        Id
-	ClusterSize  Id `spirv:"optional"`
+	ResultType  Id
+	ResultId    Id
+	Execution   Id
+	Operation   GroupOperation
+	Value       Id
+	ClusterSize Id `spirv:"optional"`
 }
 
 func (op *OpGroupNonUniformBitwiseOr) Opcode() uint32 { return opcodeGroupNonUniformBitwiseOr }
@@ -3653,12 +3653,12 @@ func (op *OpGroupNonUniformBitwiseOr) Optional() bool { return false }
 func (op *OpGroupNonUniformBitwiseOr) Verify() error  { return nil }
 
 type OpGroupNonUniformBitwiseXor struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	Value        Id
-	ClusterSize  Id `spirv:"optional"`
+	ResultType  Id
+	ResultId    Id
+	Execution   Id
+	Operation   GroupOperation
+	Value       Id
+	ClusterSize Id `spirv:"optional"`
 }
 
 func (op *OpGroupNonUniformBitwiseXor) Opcode() uint32 { return opcodeGroupNonUniformBitwiseXor }
@@ -3666,12 +3666,12 @@ func (op *OpGroupNonUniformBitwiseXor) Optional() bool { return false }
 func (op *OpGroupNonUniformBitwiseXor) Verify() error  { return nil }
 
 type OpGroupNonUniformLogicalAnd struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	Value        Id
-	ClusterSize  Id `spirv:"optional"`
+	ResultType  Id
+	ResultId    Id
+	Execution   Id
+	Operation   GroupOperation
+	Value       Id
+	ClusterSize Id `spirv:"optional"`
 }
 
 func (op *OpGroupNonUniformLogicalAnd) Opcode() uint32 { return opcodeGroupNonUniformLogicalAnd }
@@ -3679,12 +3679,12 @@ func (op *OpGroupNonUniformLogicalAnd) Optional() bool { return false }
 func (op *OpGroupNonUniformLogicalAnd) Verify() error  { return nil }
 
 type OpGroupNonUniformLogicalOr struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	Value        Id
-	ClusterSize  Id `spirv:"optional"`
+	ResultType  Id
+	ResultId    Id
+	Execution   Id
+	Operation   GroupOperation
+	Value       Id
+	ClusterSize Id `spirv:"optional"`
 }
 
 func (op *OpGroupNonUniformLogicalOr) Opcode() uint32 { return opcodeGroupNonUniformLogicalOr }
@@ -3692,12 +3692,12 @@ func (op *OpGroupNonUniformLogicalOr) Optional() bool { return false }
 func (op *OpGroupNonUniformLogicalOr) Verify() error  { return nil }
 
 type OpGroupNonUniformLogicalXor struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	Value        Id
-	ClusterSize  Id `spirv:"optional"`
+	ResultType  Id
+	ResultId    Id
+	Execution   Id
+	Operation   GroupOperation
+	Value       Id
+	ClusterSize Id `spirv:"optional"`
 }
 
 func (op *OpGroupNonUniformLogicalXor) Opcode() uint32 { return opcodeGroupNonUniformLogicalXor }
@@ -3705,11 +3705,11 @@ func (op *OpGroupNonUniformLogicalXor) Optional() bool { return false }
 func (op *OpGroupNonUniformLogicalXor) Verify() error  { return nil }
 
 type OpGroupNonUniformQuadBroadcast struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Value        Id
-	Index        Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Value      Id
+	Index      Id
 }
 
 func (op *OpGroupNonUniformQuadBroadcast) Opcode() uint32 { return opcodeGroupNonUniformQuadBroadcast }
@@ -3717,11 +3717,11 @@ func (op *OpGroupNonUniformQuadBroadcast) Optional() bool { return false }
 func (op *OpGroupNonUniformQuadBroadcast) Verify() error  { return nil }
 
 type OpGroupNonUniformQuadSwap struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Value        Id
-	Direction    Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Value      Id
+	Direction  Id
 }
 
 func (op *OpGroupNonUniformQuadSwap) Opcode() uint32 { return opcodeGroupNonUniformQuadSwap }
@@ -3729,9 +3729,9 @@ func (op *OpGroupNonUniformQuadSwap) Optional() bool { return false }
 func (op *OpGroupNonUniformQuadSwap) Verify() error  { return nil }
 
 type OpCopyLogical struct {
-	IdResultType Id
-	IdResult     Id
-	Operand      Id
+	ResultType Id
+	ResultId   Id
+	Operand    Id
 }
 
 func (op *OpCopyLogical) Opcode() uint32 { return opcodeCopyLogical }
@@ -3739,10 +3739,10 @@ func (op *OpCopyLogical) Optional() bool { return false }
 func (op *OpCopyLogical) Verify() error  { return nil }
 
 type OpPtrEqual struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpPtrEqual) Opcode() uint32 { return opcodePtrEqual }
@@ -3750,10 +3750,10 @@ func (op *OpPtrEqual) Optional() bool { return false }
 func (op *OpPtrEqual) Verify() error  { return nil }
 
 type OpPtrNotEqual struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpPtrNotEqual) Opcode() uint32 { return opcodePtrNotEqual }
@@ -3761,10 +3761,10 @@ func (op *OpPtrNotEqual) Optional() bool { return false }
 func (op *OpPtrNotEqual) Verify() error  { return nil }
 
 type OpPtrDiff struct {
-	IdResultType Id
-	IdResult     Id
-	Operand1     Id
-	Operand2     Id
+	ResultType Id
+	ResultId   Id
+	Operand1   Id
+	Operand2   Id
 }
 
 func (op *OpPtrDiff) Opcode() uint32 { return opcodePtrDiff }
@@ -3772,9 +3772,9 @@ func (op *OpPtrDiff) Optional() bool { return false }
 func (op *OpPtrDiff) Verify() error  { return nil }
 
 type OpSubgroupBallotKHR struct {
-	IdResultType Id
-	IdResult     Id
-	Predicate    Id
+	ResultType Id
+	ResultId   Id
+	Predicate  Id
 }
 
 func (op *OpSubgroupBallotKHR) Opcode() uint32 { return opcodeSubgroupBallotKHR }
@@ -3782,9 +3782,9 @@ func (op *OpSubgroupBallotKHR) Optional() bool { return false }
 func (op *OpSubgroupBallotKHR) Verify() error  { return nil }
 
 type OpSubgroupFirstInvocationKHR struct {
-	IdResultType Id
-	IdResult     Id
-	Value        Id
+	ResultType Id
+	ResultId   Id
+	Value      Id
 }
 
 func (op *OpSubgroupFirstInvocationKHR) Opcode() uint32 { return opcodeSubgroupFirstInvocationKHR }
@@ -3792,9 +3792,9 @@ func (op *OpSubgroupFirstInvocationKHR) Optional() bool { return false }
 func (op *OpSubgroupFirstInvocationKHR) Verify() error  { return nil }
 
 type OpSubgroupAllKHR struct {
-	IdResultType Id
-	IdResult     Id
-	Predicate    Id
+	ResultType Id
+	ResultId   Id
+	Predicate  Id
 }
 
 func (op *OpSubgroupAllKHR) Opcode() uint32 { return opcodeSubgroupAllKHR }
@@ -3802,9 +3802,9 @@ func (op *OpSubgroupAllKHR) Optional() bool { return false }
 func (op *OpSubgroupAllKHR) Verify() error  { return nil }
 
 type OpSubgroupAnyKHR struct {
-	IdResultType Id
-	IdResult     Id
-	Predicate    Id
+	ResultType Id
+	ResultId   Id
+	Predicate  Id
 }
 
 func (op *OpSubgroupAnyKHR) Opcode() uint32 { return opcodeSubgroupAnyKHR }
@@ -3812,9 +3812,9 @@ func (op *OpSubgroupAnyKHR) Optional() bool { return false }
 func (op *OpSubgroupAnyKHR) Verify() error  { return nil }
 
 type OpSubgroupAllEqualKHR struct {
-	IdResultType Id
-	IdResult     Id
-	Predicate    Id
+	ResultType Id
+	ResultId   Id
+	Predicate  Id
 }
 
 func (op *OpSubgroupAllEqualKHR) Opcode() uint32 { return opcodeSubgroupAllEqualKHR }
@@ -3822,10 +3822,10 @@ func (op *OpSubgroupAllEqualKHR) Optional() bool { return false }
 func (op *OpSubgroupAllEqualKHR) Verify() error  { return nil }
 
 type OpSubgroupReadInvocationKHR struct {
-	IdResultType Id
-	IdResult     Id
-	Value        Id
-	Index        Id
+	ResultType Id
+	ResultId   Id
+	Value      Id
+	Index      Id
 }
 
 func (op *OpSubgroupReadInvocationKHR) Opcode() uint32 { return opcodeSubgroupReadInvocationKHR }
@@ -3833,11 +3833,11 @@ func (op *OpSubgroupReadInvocationKHR) Optional() bool { return false }
 func (op *OpSubgroupReadInvocationKHR) Verify() error  { return nil }
 
 type OpGroupIAddNonUniformAMD struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	X            Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Operation  GroupOperation
+	X          Id
 }
 
 func (op *OpGroupIAddNonUniformAMD) Opcode() uint32 { return opcodeGroupIAddNonUniformAMD }
@@ -3845,11 +3845,11 @@ func (op *OpGroupIAddNonUniformAMD) Optional() bool { return false }
 func (op *OpGroupIAddNonUniformAMD) Verify() error  { return nil }
 
 type OpGroupFAddNonUniformAMD struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	X            Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Operation  GroupOperation
+	X          Id
 }
 
 func (op *OpGroupFAddNonUniformAMD) Opcode() uint32 { return opcodeGroupFAddNonUniformAMD }
@@ -3857,11 +3857,11 @@ func (op *OpGroupFAddNonUniformAMD) Optional() bool { return false }
 func (op *OpGroupFAddNonUniformAMD) Verify() error  { return nil }
 
 type OpGroupFMinNonUniformAMD struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	X            Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Operation  GroupOperation
+	X          Id
 }
 
 func (op *OpGroupFMinNonUniformAMD) Opcode() uint32 { return opcodeGroupFMinNonUniformAMD }
@@ -3869,11 +3869,11 @@ func (op *OpGroupFMinNonUniformAMD) Optional() bool { return false }
 func (op *OpGroupFMinNonUniformAMD) Verify() error  { return nil }
 
 type OpGroupUMinNonUniformAMD struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	X            Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Operation  GroupOperation
+	X          Id
 }
 
 func (op *OpGroupUMinNonUniformAMD) Opcode() uint32 { return opcodeGroupUMinNonUniformAMD }
@@ -3881,11 +3881,11 @@ func (op *OpGroupUMinNonUniformAMD) Optional() bool { return false }
 func (op *OpGroupUMinNonUniformAMD) Verify() error  { return nil }
 
 type OpGroupSMinNonUniformAMD struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	X            Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Operation  GroupOperation
+	X          Id
 }
 
 func (op *OpGroupSMinNonUniformAMD) Opcode() uint32 { return opcodeGroupSMinNonUniformAMD }
@@ -3893,11 +3893,11 @@ func (op *OpGroupSMinNonUniformAMD) Optional() bool { return false }
 func (op *OpGroupSMinNonUniformAMD) Verify() error  { return nil }
 
 type OpGroupFMaxNonUniformAMD struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	X            Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Operation  GroupOperation
+	X          Id
 }
 
 func (op *OpGroupFMaxNonUniformAMD) Opcode() uint32 { return opcodeGroupFMaxNonUniformAMD }
@@ -3905,11 +3905,11 @@ func (op *OpGroupFMaxNonUniformAMD) Optional() bool { return false }
 func (op *OpGroupFMaxNonUniformAMD) Verify() error  { return nil }
 
 type OpGroupUMaxNonUniformAMD struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	X            Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Operation  GroupOperation
+	X          Id
 }
 
 func (op *OpGroupUMaxNonUniformAMD) Opcode() uint32 { return opcodeGroupUMaxNonUniformAMD }
@@ -3917,11 +3917,11 @@ func (op *OpGroupUMaxNonUniformAMD) Optional() bool { return false }
 func (op *OpGroupUMaxNonUniformAMD) Verify() error  { return nil }
 
 type OpGroupSMaxNonUniformAMD struct {
-	IdResultType Id
-	IdResult     Id
-	Execution    Id
-	Operation    GroupOperation
-	X            Id
+	ResultType Id
+	ResultId   Id
+	Execution  Id
+	Operation  GroupOperation
+	X          Id
 }
 
 func (op *OpGroupSMaxNonUniformAMD) Opcode() uint32 { return opcodeGroupSMaxNonUniformAMD }
@@ -3929,8 +3929,8 @@ func (op *OpGroupSMaxNonUniformAMD) Optional() bool { return false }
 func (op *OpGroupSMaxNonUniformAMD) Verify() error  { return nil }
 
 type OpImageSampleFootprintNV struct {
-	IdResultType  Id
-	IdResult      Id
+	ResultType    Id
+	ResultId      Id
 	SampledImage  Id
 	Coordinate    Id
 	Granularity   Id
@@ -3943,9 +3943,9 @@ func (op *OpImageSampleFootprintNV) Optional() bool { return false }
 func (op *OpImageSampleFootprintNV) Verify() error  { return nil }
 
 type OpGroupNonUniformPartitionNV struct {
-	IdResultType Id
-	IdResult     Id
-	Value        Id
+	ResultType Id
+	ResultId   Id
+	Value      Id
 }
 
 func (op *OpGroupNonUniformPartitionNV) Opcode() uint32 { return opcodeGroupNonUniformPartitionNV }
@@ -3953,8 +3953,8 @@ func (op *OpGroupNonUniformPartitionNV) Optional() bool { return false }
 func (op *OpGroupNonUniformPartitionNV) Verify() error  { return nil }
 
 type OpSubgroupShuffleINTEL struct {
-	IdResultType Id
-	IdResult     Id
+	ResultType   Id
+	ResultId     Id
 	Data         Id
 	InvocationId Id
 }
@@ -3964,11 +3964,11 @@ func (op *OpSubgroupShuffleINTEL) Optional() bool { return false }
 func (op *OpSubgroupShuffleINTEL) Verify() error  { return nil }
 
 type OpSubgroupShuffleDownINTEL struct {
-	IdResultType Id
-	IdResult     Id
-	Current      Id
-	Next         Id
-	Delta        Id
+	ResultType Id
+	ResultId   Id
+	Current    Id
+	Next       Id
+	Delta      Id
 }
 
 func (op *OpSubgroupShuffleDownINTEL) Opcode() uint32 { return opcodeSubgroupShuffleDownINTEL }
@@ -3976,11 +3976,11 @@ func (op *OpSubgroupShuffleDownINTEL) Optional() bool { return false }
 func (op *OpSubgroupShuffleDownINTEL) Verify() error  { return nil }
 
 type OpSubgroupShuffleUpINTEL struct {
-	IdResultType Id
-	IdResult     Id
-	Previous     Id
-	Current      Id
-	Delta        Id
+	ResultType Id
+	ResultId   Id
+	Previous   Id
+	Current    Id
+	Delta      Id
 }
 
 func (op *OpSubgroupShuffleUpINTEL) Opcode() uint32 { return opcodeSubgroupShuffleUpINTEL }
@@ -3988,10 +3988,10 @@ func (op *OpSubgroupShuffleUpINTEL) Optional() bool { return false }
 func (op *OpSubgroupShuffleUpINTEL) Verify() error  { return nil }
 
 type OpSubgroupShuffleXorINTEL struct {
-	IdResultType Id
-	IdResult     Id
-	Data         Id
-	Value        Id
+	ResultType Id
+	ResultId   Id
+	Data       Id
+	Value      Id
 }
 
 func (op *OpSubgroupShuffleXorINTEL) Opcode() uint32 { return opcodeSubgroupShuffleXorINTEL }
@@ -3999,9 +3999,9 @@ func (op *OpSubgroupShuffleXorINTEL) Optional() bool { return false }
 func (op *OpSubgroupShuffleXorINTEL) Verify() error  { return nil }
 
 type OpSubgroupBlockReadINTEL struct {
-	IdResultType Id
-	IdResult     Id
-	Ptr          Id
+	ResultType Id
+	ResultId   Id
+	Ptr        Id
 }
 
 func (op *OpSubgroupBlockReadINTEL) Opcode() uint32 { return opcodeSubgroupBlockReadINTEL }
@@ -4018,10 +4018,10 @@ func (op *OpSubgroupBlockWriteINTEL) Optional() bool { return false }
 func (op *OpSubgroupBlockWriteINTEL) Verify() error  { return nil }
 
 type OpSubgroupImageBlockReadINTEL struct {
-	IdResultType Id
-	IdResult     Id
-	Image        Id
-	Coordinate   Id
+	ResultType Id
+	ResultId   Id
+	Image      Id
+	Coordinate Id
 }
 
 func (op *OpSubgroupImageBlockReadINTEL) Opcode() uint32 { return opcodeSubgroupImageBlockReadINTEL }
@@ -4039,12 +4039,12 @@ func (op *OpSubgroupImageBlockWriteINTEL) Optional() bool { return false }
 func (op *OpSubgroupImageBlockWriteINTEL) Verify() error  { return nil }
 
 type OpSubgroupImageMediaBlockReadINTEL struct {
-	IdResultType Id
-	IdResult     Id
-	Image        Id
-	Coordinate   Id
-	Width        Id
-	Height       Id
+	ResultType Id
+	ResultId   Id
+	Image      Id
+	Coordinate Id
+	Width      Id
+	Height     Id
 }
 
 func (op *OpSubgroupImageMediaBlockReadINTEL) Opcode() uint32 {
