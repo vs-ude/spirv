@@ -22,3 +22,6 @@ _testmain.go
 *.exe
 *.test
 *.prof
+
+# Intermediate files that should be updated externally
+spirv.core.grammar.json
