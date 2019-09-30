@@ -31,7 +31,7 @@ func dumpHeader(hdr spirv.Header) {
 // dumpInstruction prints a human-readable dump of the given instruction.
 func dumpInstruction(i spirv.Instruction) {
 	name := fmt.Sprintf("%T", i)
-	name = name[len("*spirv.Op"):]
+	name = name[len("*spirv."):]
 	fields := instructionFields(i)
 
 	fmt.Println(" ", name)
