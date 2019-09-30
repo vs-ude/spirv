@@ -3,16 +3,16 @@
 package spirv
 
 type PairLiteralIntegerIdRef struct {
-	a uint32
-	b Id
+	A uint32
+	B Id
 }
 
 type PairIdRefLiteralInteger struct {
-	a Id
-	b uint32
+	A Id
+	B uint32
 }
 
 type PairIdRefIdRef struct {
-	a Id
-	b Id
+	A Id
+	B Id
 }
