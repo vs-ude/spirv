@@ -153,7 +153,6 @@ func DecodeInstruction(words []uint32) (Instruction, error) {
 	}
 
 	instr := constructor()
-	fmt.Println("decoding", instructionName(instr), wordCount, words)
 
 	// This instruction is illegal.
 	// FIXME Remove this once instruction validation code is in.
