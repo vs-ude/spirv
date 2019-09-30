@@ -65,19 +65,19 @@ func makeNew(file string) {
 
 	mod := spirv.NewModule()
 	mod.Code = []spirv.Instruction{
-		&spirv.OpSource{spirv.SourceLanguageGLSL, 450},
+		&spirv.OpSource{spirv.SourceLanguageGLSL, 450, 0, ""},
 		&spirv.OpExtInst{
 			ResultType:  1,
 			ResultId:    2,
 			Set:         3,
 			Instruction: 4,
-			Operands:    []spirv.Id{5, 4, 5},
+			Argv:        []spirv.Id{5, 4, 5},
 		},
 		&spirv.OpFunction{
-			ResultType:   0,
-			ResultId:     1,
-			ControlMask:  spirv.FunctionControlMaskInLine,
-			FunctionType: 2,
+			ResultType:      0,
+			ResultId:        1,
+			FunctionControl: spirv.FunctionControlInline,
+			FunctionType:    2,
 		},
 		&spirv.OpFunctionParameter{
 			ResultType: 0,
