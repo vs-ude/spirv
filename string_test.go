@@ -11,7 +11,7 @@ import (
 type StringTest struct {
 	in      String
 	want    []uint32
-	wantLen uint32
+	wantLen int
 }
 
 func TestString(t *testing.T) {
