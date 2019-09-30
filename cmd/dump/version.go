@@ -12,7 +12,7 @@ import (
 const (
 	AppName         = "dump"
 	AppVersionMajor = 0
-	AppVersionMinor = 2
+	AppVersionMinor = 3
 )
 
 // Version returns the application version as a string.
