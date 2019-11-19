@@ -46,7 +46,7 @@ type Header struct {
 	// All Ids in this module are guaranteed to satisfy: 0 < id < Bound.
 	// Bound should be small; smaller is better with all <id> in a module
 	// being densely packed and near 0.
-	Bound uint32
+	Bound Id
 
 	// 0 (Reserved for instruction schema, if needed.)
 	Reserved uint32
