@@ -21,7 +21,7 @@ const (
 )
 
 // Version number of the specification this package was written for.
-const SpecificationVersion = 99
+const SpecificationVersion = 0x00010500
 
 // Header defines the header of a SPIR-V Module.
 type Header struct {
@@ -33,8 +33,7 @@ type Header struct {
 	// byte stream back to a word stream.
 	Magic uint32
 
-	// Version number -- The first public version will be 100.
-	// Uses 99 for pre-release.
+	// Version number -- Bytes are arranged as 0 | Major | Minor | 0.
 	Version uint32
 
 	// Generator’s magic number. It is associated with the tool that generated
