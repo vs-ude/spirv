@@ -22,9 +22,9 @@ type Instruction interface {
 	Optional() bool
 }
 
-// instructionResultId returns the value of the instruction's result Id,
+// InstructionResultId returns the value of the instruction's result Id,
 // provided it defines one.
-func instructionResultId(i Instruction) (Id, bool) {
+func InstructionResultId(i Instruction) (Id, bool) {
 	rv := reflect.ValueOf(i)
 	rv = reflect.Indirect(rv)
 
@@ -37,9 +37,9 @@ func instructionResultId(i Instruction) (Id, bool) {
 	return id, true
 }
 
-// instructionName returns the name for the given instruction.
+// InstructionName returns the name for the given instruction.
 // This is the type name, minus some package cruft.
-func instructionName(i Instruction) string {
+func InstructionName(i Instruction) string {
 	name := fmt.Sprintf("%T", i)
 	return name[len("*spirv."):]
 }

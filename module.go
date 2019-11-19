@@ -194,7 +194,7 @@ func (m *Module) verifySSA() error {
 			continue
 		}
 
-		id, ok := instructionResultId(instr)
+		id, ok := InstructionResultId(instr)
 		if !ok {
 			continue
 		}
@@ -221,7 +221,7 @@ func (m *Module) verifySSA() error {
 // matching any of the Result Ids in list. Returns -1 otherwise.
 func (m *Module) hasResultId(src Id, list []int) int {
 	for _, addr := range list {
-		dst, ok := instructionResultId(m.Code[addr])
+		dst, ok := InstructionResultId(m.Code[addr])
 		if ok && src == dst {
 			return addr
 		}
