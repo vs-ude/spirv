@@ -8,7 +8,7 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/andreas-jonsson/spirv"
+	"github.com/vs-ude/spirv"
 )
 
 // dump prints a human-readable dump of the given module.
