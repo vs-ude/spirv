@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/andreas-jonsson/spirv"
+	"github.com/vs-ude/spirv"
 )
 
 func main() {
