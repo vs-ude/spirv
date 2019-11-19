@@ -58,7 +58,7 @@ func (e *Encoder) EncodeHeader(h Header) error {
 	return e.write([]uint32{
 		h.Version,
 		h.GeneratorMagic,
-		h.Bound,
+		uint32(h.Bound),
 		h.Reserved,
 	})
 }

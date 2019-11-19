@@ -18,7 +18,7 @@ func NewModule() *Module {
 			Magic:          MagicLE,
 			Version:        SpecificationVersion,
 			GeneratorMagic: 0,
-			Bound:          0,
+			Bound:          1,
 			Reserved:       0,
 		},
 	}
